@@ -32,6 +32,16 @@ After `npm run build`, upload **`.vitepress/dist`** to any static host (Netlify,
 **GitHub Pages (this repo):** the live site is **[https://openfetch-js.github.io/openfetch-docs/](https://openfetch-js.github.io/openfetch-docs/)**.  
 `base` is set to **`/openfetch-docs/`** in [`.vitepress/config.mts`](./.vitepress/config.mts) so assets and the router work under that path. Local dev and `npm run preview` use the same base (open **`http://localhost:5173/openfetch-docs/`** after `npm run dev`).
 
+**If the live site looks unstyled (plain HTML):** Pages is almost certainly **not** serving the VitePress build. Check the page source: if you see `generator" content="Jekyll`, GitHub is building **Jekyll** from a branch (e.g. `main` + `/docs`) instead of your VitePress `dist`.
+
+**Fix:**
+
+1. Repo **Settings → Pages → Build and deployment**.
+2. Under **Source**, choose **GitHub Actions** (not “Deploy from a branch”).
+3. Push to `main` so [`.github/workflows/deploy-docs.yml`](./.github/workflows/deploy-docs.yml) runs; it uploads **`.vitepress/dist`** via the official Pages workflow.
+
+The build output also includes **`public/.nojekyll`** in `dist` so static assets are not processed as Jekyll if you ever publish that folder manually.
+
 If you move hosting to the **domain root**, change `base` to `"/"`.
 
 ### Locales
