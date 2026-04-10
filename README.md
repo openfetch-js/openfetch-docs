@@ -6,7 +6,11 @@ Multilingual documentation for **`@hamdymohamedak/openfetch`** (fetch-only HTTP 
 
 ## Documentation website (VitePress)
 
-This folder is a **[VitePress](https://vitepress.dev/)** site. Markdown sources live in locale directories (`en/`, `es/`, …); the home page is [`index.md`](./index.md).
+This folder is a **[VitePress](https://vitepress.dev/)** site.
+
+- **Default language:** English at **`/`** (overview, guides, API reference pages).
+- **Language hub:** **`/languages/`** — links to every locale.
+- **Navbar:** **Guide** (getting started) and **Languages**; the **globe icon** (desktop) switches locale while keeping the same page when translations exist (`i18nRouting`).
 
 ### Commands
 
@@ -33,28 +37,37 @@ export default defineConfig({
 
 ### Locales
 
-| Path prefix | Language |
-|-------------|----------|
-| `/en/` | English |
-| `/es/` | Spanish |
-| `/fa/` | Persian (Farsi), RTL |
-| `/fr/` | French |
-| `/hi/` | Hindi |
-| `/it/` | Italian |
-| `/ja/` | Japanese |
-| `/kr/` | Korean (HTML `lang` is `ko`) |
-| `/ku/` | Kurdish |
+| Path prefix | Language | Notes |
+|-------------|----------|--------|
+| `/` | English (default) | Full guide set including HTTP methods & React/Vue |
+| `/ar/` | Arabic (العربية) | RTL · full parity with English sidebar |
+| `/es/` | Spanish | |
+| `/fa/` | Persian (Farsi) | RTL |
+| `/fr/` | French | |
+| `/hi/` | Hindi | |
+| `/it/` | Italian | |
+| `/ja/` | Japanese | |
+| `/kr/` | Korean | HTML `lang` is `ko` |
+| `/ku/` | Kurdish | |
 
-The **root** `/` page is a language hub. Each locale sidebar includes a link back to that hub.
+### Source layout (English at repo root)
 
-### Source layout (every locale)
+1. **`index.md`** — Overview  
+2. **`getting-started.md`** — Install, default client, `createClient`, middleware  
+3. **`http-methods.md`** — GET, POST, PUT, PATCH, DELETE, `request()`, bodies & params  
+4. **`framework-guides.md`** — React, RSC, Vue 3, SSR notes  
+5. **`configuration.md`** — `OpenFetchConfig`, merge rules, `unwrapResponse`  
+6. **`interceptors-middleware.md`** — Interceptors, `use()`, ordering  
+7. **`retry-cache.md`** — Retry middleware, memory cache, SWR  
+8. **`errors-security.md`** — `OpenFetchError`, `toShape`, `assertSafeHttpUrl`  
+9. **`languages/index.md`** — Landing page listing all locales  
 
-1. **`index.md`** — Overview and reading order  
-2. **`getting-started.md`** — Install, default client, `createClient`, quick examples  
-3. **`configuration.md`** — `OpenFetchConfig`, URL building, body/headers, `RequestInit`, merging  
-4. **`interceptors-middleware.md`** — Request/response interceptors, `use()`, middleware chain  
-5. **`retry-cache.md`** — `createRetryMiddleware`, `MemoryCacheStore`, `createCacheMiddleware`, cache keys  
-6. **`errors-security.md`** — `OpenFetchError`, error codes, `toShape` / logging, `assertSafeHttpUrl`  
+Translated locales live under **`ar/`**, **`es/`**, etc. (same filenames where translated).
+
+### LLM / agent files
+
+- **`public/llms.txt`** — Copied to site root as **`/llms.txt`** when built (concise API + doc map).  
+- **`skills.md`** — Repo-only companion for AI tools (excluded from VitePress pages via `srcExclude`).
 
 ### Package version
 

@@ -10,7 +10,7 @@ The package is ESM-only (`"type": "module"`). Import from `"@hamdymohamedak/open
 
 ## Default instance
 
-The package default export is a client created with `createClient()` and no initial defaults:
+The default export is a client created with `createClient()` and no initial defaults:
 
 ```ts
 import openFetch from "@hamdymohamedak/openfetch";
@@ -37,7 +37,7 @@ const users = await api.get("/v1/users");
 // With unwrapResponse: true, users is the parsed body only (T), not OpenFetchResponse
 ```
 
-## HTTP helpers
+## HTTP helpers (overview)
 
 Each method returns `Promise<OpenFetchResponse<T>>` unless `unwrapResponse` is true, then `Promise<T>`.
 
@@ -49,6 +49,8 @@ Each method returns `Promise<OpenFetchResponse<T>>` unless `unwrapResponse` is t
 | `delete` | URL + optional config |
 
 **URL required:** If the merged config has no `url`, the client throws: ``openfetch: `url` is required``.
+
+For method-by-method examples (query params, JSON, `FormData`, `unwrapResponse`), see [HTTP methods](./http-methods.md).
 
 ## Registering middleware
 
@@ -66,4 +68,6 @@ See [Interceptors & middleware](./interceptors-middleware.md) and [Retry & cache
 
 ## Next
 
+- [HTTP methods](./http-methods.md) — detailed syntax for every verb  
+- [React & Vue](./framework-guides.md) — framework integration patterns  
 - [Configuration](./configuration.md) for every request option and response details.

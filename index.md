@@ -1,49 +1,40 @@
----
-layout: home
+# openFetch
 
-hero:
-  name: openFetch
-  text: Documentation
-  tagline: Fetch-only HTTP client — interceptors, middleware, retry, memory cache, RSC-friendly.
-  actions:
-    - theme: brand
-      text: English
-      link: /en/
-    - theme: alt
-      text: Español
-      link: /es/
-    - theme: alt
-      text: Français
-      link: /fr/
-    - theme: alt
-      text: Italiano
-      link: /it/
+**@hamdymohamedak/openfetch** is a small, dependency-free HTTP client for any JavaScript runtime that exposes the standard [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API. It gives you instances with defaults, request/response **interceptors**, composable **middleware**, optional **retry** with backoff, **in-memory caching** for GET/HEAD, structured **errors**, and an optional **URL guard** for untrusted URLs — without tying you to React, `window`, or legacy XHR.
 
-features:
-  - title: فارسی (Farsi)
-    details: RTL-friendly content · Persian
-    link: /fa/
-    linkText: Open
-  - title: हिन्दी (Hindi)
-    details: Hindi documentation
-    link: /hi/
-    linkText: Open
-  - title: 日本語 (Japanese)
-    details: Japanese documentation
-    link: /ja/
-    linkText: Open
-  - title: 한국어 (Korean)
-    details: Locale path /kr/ (lang ko)
-    link: /kr/
-    linkText: Open
-  - title: Kurdî (Kurdish)
-    details: Kurdish documentation
-    link: /ku/
-    linkText: Open
----
+## Design goals
 
-### Package
+- **One transport:** `fetch` only (Node 18+, Bun, Deno, Workers, browsers).
+- **No required polyfills** on supported environments.
+- **Server-safe:** suitable for SSR and React Server Components.
 
-Install **`@hamdymohamedak/openfetch`** from npm. Docs match the public API around **v0.2.x**.
+## Documentation
 
-For architecture and request flow, see the package repo **`openFetch/docs/PROJECT_FLOW.md`**.
+1. [Getting started](./getting-started.md) — install, default export, `createClient`, first requests  
+2. [HTTP methods](./http-methods.md) — GET, POST, PUT, PATCH, DELETE, `request()`, bodies and query params  
+3. [React & Vue](./framework-guides.md) — hooks, composables, shared clients, RSC notes  
+4. [Configuration](./configuration.md) — full request config, response shape, `unwrapResponse`  
+5. [Interceptors & middleware](./interceptors-middleware.md) — execution order, `use()`, custom middleware  
+6. [Retry & cache](./retry-cache.md) — `createRetryMiddleware`, `createCacheMiddleware`, TTL / SWR  
+7. [Errors & security](./errors-security.md) — `OpenFetchError`, codes, safe logging, `assertSafeHttpUrl`  
+
+## Public API (summary)
+
+| Export | Role |
+|--------|------|
+| **default** | Pre-built `createClient()` instance |
+| `createClient` / `create` | New client with optional `initialDefaults` |
+| `OpenFetchError`, `isOpenFetchError` | Typed errors + type guard |
+| `InterceptorManager` | Low-level interceptor stack (usually via `client.interceptors`) |
+| `createRetryMiddleware` | Retry middleware factory |
+| `MemoryCacheStore`, `createCacheMiddleware`, `appendCacheKeyVaryHeaders` | In-memory cache |
+| Types | `OpenFetchConfig`, `OpenFetchResponse`, `Middleware`, `OpenFetchClient`, etc. |
+| `assertSafeHttpUrl` | Optional SSRF-style guard for literal IP/localhost in URLs |
+
+## Requirements
+
+**Node.js 18+** or any runtime with `fetch` and `AbortController`.
+
+## Other languages
+
+Browse [all translations](/languages/).
