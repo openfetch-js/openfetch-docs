@@ -249,6 +249,8 @@ const localeConfigs = Object.fromEntries(
 >;
 
 export default defineConfig({
+  // GitHub Pages project site: https://openfetch-js.github.io/openfetch-docs/
+  base: "/openfetch-docs/",
   title: "openFetch",
   description:
     "Documentation for @hamdymohamedak/openfetch — fetch-based HTTP client with interceptors, middleware, retry, and cache.",

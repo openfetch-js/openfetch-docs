@@ -26,14 +26,10 @@ npm run preview  # serve the production build locally
 
 After `npm run build`, upload **`.vitepress/dist`** to any static host (Netlify, Vercel, GitHub Pages, S3, etc.).
 
-If the site is served from a **subpath** (for example `https://example.com/openfetch/`), set `base` in [`.vitepress/config.mts`](./.vitepress/config.mts):
+**GitHub Pages (this repo):** the live site is **[https://openfetch-js.github.io/openfetch-docs/](https://openfetch-js.github.io/openfetch-docs/)**.  
+`base` is set to **`/openfetch-docs/`** in [`.vitepress/config.mts`](./.vitepress/config.mts) so assets and the router work under that path. Local dev and `npm run preview` use the same base (open **`http://localhost:5173/openfetch-docs/`** after `npm run dev`).
 
-```ts
-export default defineConfig({
-  base: "/openfetch/",
-  // ...
-});
-```
+If you move hosting to the **domain root**, change `base` to `"/"`.
 
 ### Locales
 
