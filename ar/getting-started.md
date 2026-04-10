@@ -2,6 +2,8 @@
 
 ## التثبيت
 
+الحزمة على npm: [**@hamdymohamedak/openfetch**](https://www.npmjs.com/package/@hamdymohamedak/openfetch). المستودع: [**openfetch-js/OpenFetch**](https://github.com/openfetch-js/OpenFetch) على GitHub.
+
 ```bash
 npm install @hamdymohamedak/openfetch
 ```

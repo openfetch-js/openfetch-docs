@@ -2,6 +2,11 @@
 
 Use this file when helping users with **`@hamdymohamedak/openfetch`** (v0.2.x). Prefer facts below over guessing axios-style APIs.
 
+## Canonical links
+
+- Source: https://github.com/openfetch-js/OpenFetch  
+- npm: https://www.npmjs.com/package/@hamdymohamedak/openfetch  
+
 ## What it is
 
 - ESM-only package; **one implementation: `fetch`**. No XMLHttpRequest.

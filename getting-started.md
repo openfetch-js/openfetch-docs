@@ -2,6 +2,8 @@
 
 ## Installation
 
+Package on npm: [**@hamdymohamedak/openfetch**](https://www.npmjs.com/package/@hamdymohamedak/openfetch). Source repo: [**openfetch-js/OpenFetch**](https://github.com/openfetch-js/OpenFetch) on GitHub.
+
 ```bash
 npm install @hamdymohamedak/openfetch
 ```

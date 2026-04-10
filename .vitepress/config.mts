@@ -258,7 +258,18 @@ export default defineConfig({
   lastUpdated: true,
   themeConfig: {
     search: { provider: "local" },
-    socialLinks: [],
+    socialLinks: [
+      {
+        icon: "github",
+        link: "https://github.com/openfetch-js/OpenFetch",
+        ariaLabel: "openFetch on GitHub",
+      },
+      {
+        icon: "npm",
+        link: "https://www.npmjs.com/package/@hamdymohamedak/openfetch",
+        ariaLabel: "npm package @hamdymohamedak/openfetch",
+      },
+    ],
     footer: {
       message: "MIT · @hamdymohamedak/openfetch",
     },

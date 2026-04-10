@@ -2,6 +2,11 @@
 
 **@hamdymohamedak/openfetch** عميل HTTP صغير بلا تبعيات لأي بيئة JavaScript توفر واجهة [`fetch`](https://developer.mozilla.org/ar/docs/Web/API/Fetch_API) القياسية. يوفّر مثيلات بقيم افتراضية، **معترضات** للطلب/الاستجابة، **وسيطاً** قابلاً للتجميع، **إعادة محاولة** اختيارية مع تراجع أسي، **تخزيناً مؤقتاً في الذاكرة** لطلبات GET/HEAD، **أخطاء** منظمة، و**حارس URL** اختياري للروابط غير الموثوقة — دون ربطك بـ React أو `window` أو XHR القديم.
 
+## المصدر والحزمة
+
+- **GitHub:** [openfetch-js/OpenFetch](https://github.com/openfetch-js/OpenFetch) — الشفرة، المشاكل، والمساهمة  
+- **npm:** [@hamdymohamedak/openfetch](https://www.npmjs.com/package/@hamdymohamedak/openfetch) — تثبيت الحزمة المنشورة  
+
 ## أهداف التصميم
 
 - **نقل واحد:** `fetch` فقط (Node 18+، Bun، Deno، Workers، المتصفحات).

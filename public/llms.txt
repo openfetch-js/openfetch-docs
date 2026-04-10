@@ -4,7 +4,8 @@
 
 ## Project
 
-- npm: https://www.npmjs.com/package/@hamdymohamedak/openfetch
+- GitHub (source): https://github.com/openfetch-js/OpenFetch
+- npm (package): https://www.npmjs.com/package/@hamdymohamedak/openfetch
 - Docs site (GitHub Pages): https://openfetch-js.github.io/openfetch-docs/ — VitePress `base` is `/openfetch-docs/` (prefix path segments below with that base when resolving URLs).
 - Path map (relative to site root): English at `/` (default), Arabic at `/ar/`, hub at `/languages/`.
 - Package source layout & request lifecycle: `openFetch/docs/PROJECT_FLOW.md` (sibling monorepo path).

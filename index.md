@@ -2,6 +2,11 @@
 
 **@hamdymohamedak/openfetch** is a small, dependency-free HTTP client for any JavaScript runtime that exposes the standard [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API. It gives you instances with defaults, request/response **interceptors**, composable **middleware**, optional **retry** with backoff, **in-memory caching** for GET/HEAD, structured **errors**, and an optional **URL guard** for untrusted URLs — without tying you to React, `window`, or legacy XHR.
 
+## Source & package
+
+- **GitHub:** [openfetch-js/OpenFetch](https://github.com/openfetch-js/OpenFetch) — source code, issues, and contributions  
+- **npm:** [@hamdymohamedak/openfetch](https://www.npmjs.com/package/@hamdymohamedak/openfetch) — install the published package  
+
 ## Design goals
 
 - **One transport:** `fetch` only (Node 18+, Bun, Deno, Workers, browsers).

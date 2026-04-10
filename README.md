@@ -2,7 +2,10 @@
 
 Multilingual documentation for **`@hamdymohamedak/openfetch`** (fetch-only HTTP client: interceptors, middleware, retry, memory cache, RSC-friendly).
 
-**Package source:** `../openFetch` (sibling folder in this workspace).
+- **Library (GitHub):** [github.com/openfetch-js/OpenFetch](https://github.com/openfetch-js/OpenFetch)  
+- **npm package:** [npmjs.com/package/@hamdymohamedak/openfetch](https://www.npmjs.com/package/@hamdymohamedak/openfetch)  
+
+**Local package source (optional):** `../openFetch` if you clone the monorepo sibling in this workspace.
 
 ## Documentation website (VitePress)
 
