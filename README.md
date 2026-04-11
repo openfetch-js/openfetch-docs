@@ -29,16 +29,28 @@ npm run preview  # serve the production build locally
 
 After `npm run build`, upload **`.vitepress/dist`** to any static host (Netlify, Vercel, GitHub Pages, S3, etc.).
 
-**GitHub Pages (this repo):** the live site is **[https://openfetch-js.github.io/openfetch-docs/](https://openfetch-js.github.io/openfetch-docs/)**.  
-`base` is set to **`/openfetch-docs/`** in [`.vitepress/config.mts`](./.vitepress/config.mts) so assets and the router work under that path. Local dev and `npm run preview` use the same base (open **`http://localhost:5173/openfetch-docs/`** after `npm run dev`).
+**GitHub Pages URL** depends on who owns the repo (same `base: /openfetch-docs/` in both cases):
 
-**If the live site looks unstyled (plain HTML):** Pages is almost certainly **not** serving the VitePress build. Check the page source: if you see `generator" content="Jekyll`, GitHub is building **Jekyll** from a branch (e.g. `main` + `/docs`) instead of your VitePress `dist`.
+- [openfetch-js.github.io/openfetch-docs/](https://openfetch-js.github.io/openfetch-docs/)
+- [hamdymohamedak.github.io/openfetch-docs/](https://hamdymohamedak.github.io/openfetch-docs/)
 
-**Fix:**
+`base` is **`/openfetch-docs/`** in [`.vitepress/config.mts`](./.vitepress/config.mts). For local dev open **`http://localhost:5173/openfetch-docs/`** (VitePress applies `base` there too).
 
-1. Repo **Settings → Pages → Build and deployment**.
-2. Under **Source**, choose **GitHub Actions** (not “Deploy from a branch”).
-3. Push to `main` so [`.github/workflows/deploy-docs.yml`](./.github/workflows/deploy-docs.yml) runs; it uploads **`.vitepress/dist`** via the official Pages workflow.
+#### Unstyled site or raw `<ComparisonMatrix />` in the page?
+
+That means **GitHub Pages is serving Jekyll from a branch**, not the VitePress artifact from Actions.
+
+1. Open **View Page Source** on the live URL. If you see  
+   `<meta name="generator" content="Jekyll v3.10.0" />`  
+   (and a single `assets/css/style.css` from GitHub’s theme), this repo is **not** deployed via the workflow below.
+
+**Fix (required once per repo):**
+
+1. **Settings → Pages → Build and deployment**.
+2. **Source:** select **GitHub Actions** (not “Deploy from a branch”).
+3. Run the workflow: push to `main`, or in **Actions → Deploy docs → Run workflow**.
+
+The workflow [`.github/workflows/deploy-docs.yml`](./.github/workflows/deploy-docs.yml) uploads **`.vitepress/dist`**. After a successful run, a **new** deployment appears under **Settings → Pages** (deployed by `github-pages`).
 
 The build output also includes **`public/.nojekyll`** in `dist` so static assets are not processed as Jekyll if you ever publish that folder manually.
 

@@ -71,12 +71,6 @@ const data = await ky
   .json();
 ```
 
-## Live benchmark in your browser
-
-Click **Run 5-round benchmark**: each round issues **three parallel GETs** (openFetch, Axios, ky) with **cache-busting** and `no-store` where supported. Cards show **last**, **mean**, **min**, and **max** latency for your session; the list ranks **mean time** (lower = faster this run). The fastest full run gets a small ribbon — still read the disclaimer: **network dominates**, so this is a **session snapshot**, not a universal performance crown.
-
-<LiveFetchBench />
-
 ## Why developers reach for a client layer
 
 - **Shared configuration** — `baseURL`, headers, timeouts, and `unwrapResponse` once per `createClient` instance.

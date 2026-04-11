@@ -103,3 +103,92 @@
 .VPNavBarTranslations .title {
   unicode-bidi: plaintext;
 }
+
+/* ── Root English home (html.of-docs-root-home from theme/Layout.vue) ── */
+html.of-docs-root-home .VPHome .VPHero {
+  position: relative;
+  overflow: clip;
+}
+
+html.of-docs-root-home .VPHome .VPHero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      920px 440px at 10% 12%,
+      color-mix(in srgb, var(--vp-c-brand-1) 16%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      780px 380px at 92% 18%,
+      color-mix(in srgb, #6366f1 14%, transparent),
+      transparent 58%
+    ),
+    radial-gradient(
+      640px 320px at 50% 108%,
+      color-mix(in srgb, var(--vp-c-brand-3) 12%, transparent),
+      transparent 55%
+    );
+}
+
+html.of-docs-root-home .VPHome .VPHero .container {
+  position: relative;
+  z-index: 1;
+}
+
+html.of-docs-root-home .VPHome .VPHero .image-container {
+  width: min(100%, 460px);
+  height: auto;
+  min-height: 260px;
+}
+
+@media (min-width: 960px) {
+  html.of-docs-root-home .VPHome .VPHero .image-container {
+    min-height: 300px;
+    /*rtl:ignore*/
+    transform: translate(-12px, -20px);
+  }
+}
+
+html.of-docs-root-home .VPHome .VPFeatures .item {
+  animation: of-home-feat-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.of-docs-root-home .VPHome .VPFeatures .item:nth-child(1) {
+  animation-delay: 0.04s;
+}
+html.of-docs-root-home .VPHome .VPFeatures .item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+html.of-docs-root-home .VPHome .VPFeatures .item:nth-child(3) {
+  animation-delay: 0.16s;
+}
+html.of-docs-root-home .VPHome .VPFeatures .item:nth-child(4) {
+  animation-delay: 0.22s;
+}
+html.of-docs-root-home .VPHome .VPFeatures .item:nth-child(5) {
+  animation-delay: 0.28s;
+}
+html.of-docs-root-home .VPHome .VPFeatures .item:nth-child(6) {
+  animation-delay: 0.34s;
+}
+
+@keyframes of-home-feat-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.of-docs-root-home .VPHome .VPFeatures .item {
+    animation: none !important;
+  }
+}
