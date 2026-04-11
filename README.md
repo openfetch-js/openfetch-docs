@@ -1,3 +1,7 @@
+<p align="center">
+  <img src=".vitepress/Logo.jpg" alt="openFetch official logo" width="400" />
+</p>
+
 # openFetch documentation
 
 Multilingual documentation for **`@hamdymohamedak/openfetch`** (fetch-only HTTP client: interceptors, middleware, retry, memory cache, RSC-friendly).

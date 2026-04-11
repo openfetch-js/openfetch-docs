@@ -394,4 +394,31 @@ function cellText(row: Row, colId: keyof Row["cells"]) {
   color: var(--vp-c-text-3);
   max-width: 52rem;
 }
+
+@media (max-width: 639px) {
+  .cmp-matrix__scroll {
+    border-radius: 12px;
+    margin-inline: 0;
+  }
+
+  .cmp-matrix__table {
+    min-width: 480px;
+    font-size: 0.8125rem;
+  }
+
+  .cmp-matrix__corner,
+  .cmp-matrix__col-head {
+    padding: 0.65rem 0.55rem;
+  }
+
+  .cmp-matrix__row-label {
+    padding: 0.55rem 0.65rem;
+    font-size: 0.78rem;
+  }
+
+  .cmp-pill {
+    font-size: 0.72rem;
+    padding: 0.22rem 0.45rem;
+  }
+}
 </style>

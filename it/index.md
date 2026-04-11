@@ -1,3 +1,16 @@
+---
+title: openFetch — Italiano
+titleTemplate: false
+description: Client HTTP leggero su fetch con intercettori, middleware, retry e cache in memoria. Node 18+, browser ed edge — senza XHR obbligatorio.
+head:
+  - - meta
+    - property: og:url
+      content: https://openfetch-js.github.io/openfetch-docs/it/
+  - - meta
+    - property: og:locale
+      content: it_IT
+---
+
 # openFetch — Italiano (it)
 
 **@hamdymohamedak/openfetch** è un client HTTP leggero senza dipendenze per qualsiasi runtime JavaScript con [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). Offre istanze con default, **intercettori** richiesta/risposta, **middleware** componibili, **retry** con backoff esponenziale, **cache in memoria** per GET/HEAD, **errori** strutturati e un **controllo URL** opzionale — senza legarsi a React, `window` o XHR legacy.

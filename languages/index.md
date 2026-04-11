@@ -1,5 +1,27 @@
 ---
 layout: home
+title: openFetch — Documentation & languages
+titleTemplate: false
+description: Choose a language for openFetch documentation. Fetch-only HTTP client with interceptors, middleware, retry, memory cache, and RSC-friendly design.
+head:
+  - - meta
+    - property: og:type
+      content: website
+  - - meta
+    - property: og:url
+      content: https://openfetch-js.github.io/openfetch-docs/languages/
+  - - meta
+    - property: og:title
+      content: openFetch — Documentation & languages
+  - - meta
+    - property: og:description
+      content: Browse openFetch docs in English, Arabic, Spanish, Japanese, and more. Fetch-native HTTP client.
+  - - meta
+    - name: twitter:title
+      content: openFetch — Documentation & languages
+  - - meta
+    - name: twitter:description
+      content: Multilingual documentation for the openFetch HTTP client.
 
 hero:
   name: openFetch

@@ -151,6 +151,13 @@ onUnmounted(() => {
   padding: 8px 0 24px;
 }
 
+@media (max-width: 959px) {
+  .dock {
+    padding: 12px clamp(8px, 3.5vw, 18px) 22px;
+    max-width: min(100%, 400px);
+  }
+}
+
 @media (min-width: 960px) {
   .dock {
     padding: 0;
@@ -304,7 +311,7 @@ onUnmounted(() => {
 
 .spinner {
   position: absolute;
-  right: 8px;
+  inset-inline-end: 8px;
   top: 4px;
   width: 22px;
   height: 22px;
@@ -447,6 +454,74 @@ onUnmounted(() => {
   }
   to {
     opacity: 1;
+  }
+}
+
+@media (max-width: 639px) {
+  .dock {
+    padding-top: 6px;
+    padding-bottom: 16px;
+    padding-inline: clamp(6px, 3.5vw, 16px);
+    max-width: 100%;
+  }
+
+  .card {
+    border-radius: 14px;
+  }
+
+  .card-top {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px 14px 10px;
+  }
+
+  .method {
+    align-self: flex-start;
+  }
+
+  .url-wrap {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .url {
+    font-size: 10px;
+  }
+
+  .body {
+    min-height: 140px;
+    padding: 12px 14px 10px;
+  }
+
+  .json {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .status-line {
+    font-size: 11px;
+    padding-inline-end: 28px;
+  }
+
+  .card-foot {
+    flex-wrap: wrap;
+    padding: 10px 14px 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .glow {
+    opacity: 0.7;
+    filter: blur(28px);
+  }
+
+  .body {
+    min-height: 128px;
+  }
+
+  .card-top {
+    padding-inline: 12px;
   }
 }
 
