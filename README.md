@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=".vitepress/Logo.jpg" alt="openFetch official logo" width="200" />
+  <img src=".vitepress/Logo.jpg" alt="openFetch official logo" width="400" />
 </p>
 
 # openFetch documentation
