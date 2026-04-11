@@ -257,7 +257,6 @@ const localeConfigs = Object.fromEntries(
             text: LABELS[code].gettingStarted,
             link: `/${code}/getting-started`,
           },
-          { text: LANG_HOME_LABEL[code], link: "/languages/" },
         ],
         sidebar: sidebarFor(code),
         outline: { level: [2, 3] },
@@ -314,10 +313,7 @@ export default defineConfig({
       link: "/",
       themeConfig: {
         langMenuLabel: "Language",
-        nav: [
-          { text: "Guide", link: "/getting-started" },
-          { text: "Languages", link: "/languages/" },
-        ],
+        nav: [{ text: "Guide", link: "/getting-started" }],
         sidebar: sidebarRoot(),
         outline: { level: [2, 3] },
       },

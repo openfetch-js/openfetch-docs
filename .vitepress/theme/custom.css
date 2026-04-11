@@ -168,15 +168,25 @@ html {
 }
 
 /* ── Navbar: openFetch logo (img uses .VPImage.logo in VitePress) ── */
+.VPNavBarTitle > a {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.VPNavBarTitle > a:hover {
+  background: transparent;
+}
+
 .VPNavBarTitle .VPImage.logo {
   display: block;
   flex-shrink: 0;
-  height: clamp(26px, 6.5vw, 34px);
+  height: clamp(38px, 9vw, 52px);
   width: auto;
-  max-width: 120px;
-  border-radius: 9px;
+  max-width: 200px;
+  border-radius: 0;
   object-fit: contain;
-  box-shadow: 0 2px 14px color-mix(in srgb, var(--vp-c-brand-1) 22%, transparent);
+  box-shadow: none;
 }
 
 .VPNavBarTitle .title {
