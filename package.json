@@ -8,6 +8,9 @@
     "preview": "vitepress preview"
   },
   "devDependencies": {
+    "@hamdymohamedak/openfetch": "^0.2.4",
+    "axios": "^1.7.9",
+    "ky": "^1.7.5",
     "search-insights": "^2.17.3",
     "vitepress": "^1.6.3",
     "vue": "^3.5.13"

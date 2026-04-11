@@ -9,6 +9,86 @@
   --vp-layout-max-width: 1480px;
 }
 
+.VPHome .VPHero .name {
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  letter-spacing: -0.04em;
+  background: linear-gradient(
+    120deg,
+    var(--vp-c-brand-1) 0%,
+    #6366f1 45%,
+    var(--vp-c-brand-3) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.VPHome .VPHero .text {
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+
+.VPHome .VPHero .tagline {
+  max-width: 52rem;
+  margin-inline: auto;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--vp-c-text-2);
+}
+
+.VPHome .VPFeatures .item {
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  padding: 1rem 1.1rem;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.VPHome .VPFeatures .item:hover {
+  border-color: rgba(37, 99, 235, 0.35);
+  box-shadow: 0 12px 36px rgba(37, 99, 235, 0.08);
+  transform: translateY(-2px);
+}
+
+.VPHome .VPFeatures .title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.VPHome .VPFeatures .details {
+  line-height: 1.6;
+}
+
+.VPHome .main > div {
+  max-width: var(--vp-layout-max-width);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.VPHome .main h2 {
+  margin-top: 2.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  border: none;
+}
+
+.VPHome .main .vp-doc table {
+  display: table;
+  width: 100%;
+  font-size: 0.92rem;
+}
+
+.VPHome .main .vp-doc th,
+.VPHome .main .vp-doc td {
+  vertical-align: middle;
+}
+
 .VPDoc .content {
   font-size: 16.5px;
   line-height: 1.7;

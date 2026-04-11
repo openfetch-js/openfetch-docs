@@ -1,17 +1,90 @@
-# openFetch
+---
+layout: home
 
-**@hamdymohamedak/openfetch** is a small, dependency-free HTTP client for any JavaScript runtime that exposes the standard [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API. It gives you instances with defaults, request/response **interceptors**, composable **middleware**, optional **retry** with backoff, **in-memory caching** for GET/HEAD, structured **errors**, and an optional **URL guard** for untrusted URLs — without tying you to React, `window`, or legacy XHR.
+hero:
+  name: openFetch
+  text: HTTP client for the fetch era
+  tagline: Interceptors, middleware, retry, and memory cache — zero hard dependency on XHR, built for Node 18+, browsers, and the edge.
+  actions:
+    - theme: brand
+      text: Get started
+      link: /getting-started
+    - theme: alt
+      text: npm
+      link: https://www.npmjs.com/package/@hamdymohamedak/openfetch
+    - theme: alt
+      text: GitHub
+      link: https://github.com/openfetch-js/OpenFetch
 
-## Source & package
+features:
+  - title: Fetch-only transport
+    details: One code path on top of standard fetch — Node, Bun, Deno, Workers, and modern browsers without mandatory polyfills.
+  - title: Interceptors & middleware
+    details: Request/response interceptors plus composable middleware for auth, logging, retries, and caching in a predictable order.
+  - title: Retry & in-memory cache
+    details: Optional retry with backoff and GET/HEAD memory cache with TTL / SWR-style patterns when you opt in.
+  - title: Structured errors & safety hooks
+    details: OpenFetchError with stable codes, optional URL guard for untrusted URLs, and helpers for safe logging.
+  - title: Tree-shakable entrypoints
+    details: Import the core client or add plugins and the fluent sugar API from dedicated subpaths.
+  - title: Server components friendly
+    details: No window assumption — suitable for SSR, APIs, and React Server Components patterns.
+---
 
-- **GitHub:** [openfetch-js/OpenFetch](https://github.com/openfetch-js/OpenFetch) — source code, issues, and contributions  
-- **npm:** [@hamdymohamedak/openfetch](https://www.npmjs.com/package/@hamdymohamedak/openfetch) — install the published package  
+## At a glance
 
-## Design goals
+<ComparisonMatrix />
 
-- **One transport:** `fetch` only (Node 18+, Bun, Deno, Workers, browsers).
-- **No required polyfills** on supported environments.
-- **Server-safe:** suitable for SSR and React Server Components.
+## Same request — three HTTP clients
+
+The [EscuelaJS categories API](https://api.escuelajs.co/api/v1/categories) returns a JSON array. Below: **openFetch**, **Axios**, and **ky**.
+
+**openFetch** — shared defaults, structured response, and room for interceptors/middleware:
+
+```ts
+import openFetch from "@hamdymohamedak/openfetch";
+
+const res = await openFetch.get(
+  "https://api.escuelajs.co/api/v1/categories"
+);
+// res.data, res.status, res.headers, res.config
+```
+
+**Axios** — familiar API; different transport defaults in the browser:
+
+```ts
+import axios from "axios";
+
+const res = await axios.get(
+  "https://api.escuelajs.co/api/v1/categories"
+);
+// res.data, res.status, res.headers, res.config
+```
+
+**ky** — minimal API on top of `fetch`:
+
+```ts
+import ky from "ky";
+
+const data = await ky
+  .get("https://api.escuelajs.co/api/v1/categories")
+  .json();
+```
+
+## Live benchmark in your browser
+
+Click **Run 5-round benchmark**: each round issues **three parallel GETs** (openFetch, Axios, ky) with **cache-busting** and `no-store` where supported. Cards show **last**, **mean**, **min**, and **max** latency for your session; the list ranks **mean time** (lower = faster this run). The fastest full run gets a small ribbon — still read the disclaimer: **network dominates**, so this is a **session snapshot**, not a universal performance crown.
+
+<LiveFetchBench />
+
+## Why developers reach for a client layer
+
+- **Shared configuration** — `baseURL`, headers, timeouts, and `unwrapResponse` once per `createClient` instance.
+- **Cross-cutting behavior** — attach auth, tracing, feature flags, and error normalization via interceptors and middleware.
+- **Resilience** — retry policies and caching strategies without rewriting every call site.
+- **Predictable errors** — map HTTP and network failures to typed errors instead of ad-hoc `try/catch` parsing.
+
+openFetch targets teams that want those benefits **while staying on fetch** everywhere the platform already provides it.
 
 ## Documentation
 
@@ -19,11 +92,10 @@
 2. [HTTP methods](./http-methods.md) — GET, POST, PUT, PATCH, DELETE, `request()`, bodies and query params  
 3. [React & Vue](./framework-guides.md) — hooks, composables, shared clients, RSC notes  
 4. [Configuration](./configuration.md) — full request config, `rawResponse`, merge rules, helper exports  
-5. [Plugins & fluent API](./plugins-fluent.md) — `@hamdymohamedak/openfetch/plugins`, `@hamdymohamedak/openfetch/sugar`, stack order  
+5. [Plugins & fluent API](./getting-started.md#subpath-imports-tree-shaking) — `@hamdymohamedak/openfetch/plugins`, `@hamdymohamedak/openfetch/sugar`  
 6. [Interceptors & middleware](./interceptors-middleware.md) — execution order, `dispatch` internals, `use()`, custom middleware  
-7. [Architecture & internals](./architecture.md) — diagrams, Axios comparison, design notes, annotated `retry` / `cache` sources  
-8. [Retry & cache](./retry-cache.md) — retry budgets, idempotency, `createCacheMiddleware`, TTL / SWR  
-9. [Errors & security](./errors-security.md) — `OpenFetchError`, codes, safe logging, `assertSafeHttpUrl`  
+7. [Retry & cache](./retry-cache.md) — retry budgets, idempotency, `createCacheMiddleware`, TTL / SWR  
+8. [Errors & security](./errors-security.md) — `OpenFetchError`, codes, safe logging, `assertSafeHttpUrl`  
 
 ## Public API (summary)
 
@@ -31,10 +103,10 @@
 |--------|------|
 | **default** | Pre-built `createClient()` instance |
 | `createClient` / `create` | New client with optional `initialDefaults` |
-| `createFluentClient` | Callable fluent URL chains (also from `/sugar` subpath) |
-| `retry`, `timeout`, `hooks`, `debug`, `strictFetch` | Middleware plugins (from `/plugins` subpath) |
+| `createFluentClient` | Callable fluent URL chains (from `/sugar`) |
+| `retry`, `timeout`, `hooks`, `debug`, `strictFetch` | Middleware plugins (from `/plugins`) |
 | `OpenFetchError`, `isOpenFetchError` | Typed errors + type guard |
-| `InterceptorManager` | Low-level interceptor stack (usually via `client.interceptors`) |
+| `InterceptorManager` | Low-level interceptor stack |
 | `createRetryMiddleware` | Retry middleware factory |
 | `MemoryCacheStore`, `createCacheMiddleware`, `appendCacheKeyVaryHeaders` | In-memory cache |
 | `maskHeaderValues`, `cloneResponse`, idempotency helpers | Logging and retry ergonomics |
@@ -44,6 +116,11 @@
 ## Requirements
 
 **Node.js 18+** or any runtime with `fetch` and `AbortController`.
+
+## Source & package
+
+- **GitHub:** [openfetch-js/OpenFetch](https://github.com/openfetch-js/OpenFetch)  
+- **npm:** [@hamdymohamedak/openfetch](https://www.npmjs.com/package/@hamdymohamedak/openfetch)  
 
 ## Other languages
 

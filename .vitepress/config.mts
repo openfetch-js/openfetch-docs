@@ -181,8 +181,7 @@ function sidebarFor(lang: Lang) {
   const extended = lang === "ar";
   const architectureLink =
     lang === "ar" ? `${p}/architecture` : "/architecture";
-  const pluginsFluentLink =
-    lang === "ar" ? `${p}/plugins-fluent` : "/plugins-fluent";
+  const pluginsFluentLink = "/plugins-fluent";
   const items: { text: string; link: string }[] = [
     { text: LANG_HOME_LABEL[lang], link: "/languages/" },
     { text: L.home, link: `${p}/` },
