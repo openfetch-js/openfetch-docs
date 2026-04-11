@@ -1,3 +1,16 @@
+---
+title: openFetch — 한국어
+titleTemplate: false
+description: 표준 fetch 기반 경량 HTTP 클라이언트. 인터셉터, 미들웨어, 재시도, 메모리 캐시. Node 18+ 및 브라우저 — XHR 강제 없음.
+head:
+  - - meta
+    - property: og:url
+      content: https://openfetch-js.github.io/openfetch-docs/kr/
+  - - meta
+    - property: og:locale
+      content: ko_KR
+---
+
 # openFetch — 한국어 (kr)
 
 이 문서 폴더 이름은 프로젝트에서 **kr** 로 표기합니다. 언어 코드로는 ISO 639-1 **ko** 가 흔히 쓰입니다.

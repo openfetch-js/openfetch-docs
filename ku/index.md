@@ -1,3 +1,13 @@
+---
+title: openFetch — Kurdî
+titleTemplate: false
+description: "Klientekî HTTP-yê li ser fetch standard — interceptors, middleware, retry û cache. Node 18+, gerok û edge — bê XHR."
+head:
+  - - meta
+    - property: og:url
+      content: https://openfetch-js.github.io/openfetch-docs/ku/
+---
+
 # openFetch — Kurdî (ku)
 
 **@hamdymohamedak/openfetch** klientekî HTTP-yê piçûk e, bê dependency, ji bo her runtime-ekî JavaScript ku [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) standard hebe. Instance bi default, **interceptors** (daxwaz/welat), **middleware**-yên komkirî, **retry** bi exponential backoff, **cache** ya bîrê ji bo GET/HEAD, **errors**-ên strukturkirî û **parastina URL**-ya bijartî pêşkêş dike — bê girêdan bi React, `window` an XHR-ên kevn.

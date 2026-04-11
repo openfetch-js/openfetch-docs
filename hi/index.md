@@ -1,3 +1,16 @@
+---
+title: openFetch — हिन्दी
+titleTemplate: false
+description: मानक fetch पर हल्का HTTP क्लाइंट — इंटरसेप्टर, मिडलवेयर, रीट्राई और मेमोरी कैश। Node 18+ और ब्राउज़र — पुराने XHR की ज़रूरत नहीं।
+head:
+  - - meta
+    - property: og:url
+      content: https://openfetch-js.github.io/openfetch-docs/hi/
+  - - meta
+    - property: og:locale
+      content: hi_IN
+---
+
 # openFetch — हिन्दी (hi)
 
 **@hamdymohamedak/openfetch** एक हल्का, बिना बाहरी निर्भरता वाला HTTP क्लाइंट है, जो किसी भी JavaScript रनटाइम में मानक [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) के साथ काम करता है। इसमें डिफ़ॉल्ट के साथ इंस्टेंस, अनुरोध/प्रतिक्रिया **इंटरसेप्टर**, जोड़े जा सकने वाला **मिडलवेयर**, घातांकी बैकऑफ़ के साथ **रीट्राई**, GET/HEAD के लिए **मेमोरी कैश**, संरचित **त्रुटियाँ** और वैकल्पिक **URL सुरक्षा जाँच** शामिल है — बिना React, `window` या पुराने XHR से जुड़ाव के।

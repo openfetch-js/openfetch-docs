@@ -1,3 +1,16 @@
+---
+title: openFetch — 日本語
+titleTemplate: false
+description: 標準 fetch 上の軽量 HTTP クライアント。インターセプター、ミドルウェア、リトライ、インメモリキャッシュ。Node 18+ とブラウザ — XHR 前提なし。
+head:
+  - - meta
+    - property: og:url
+      content: https://openfetch-js.github.io/openfetch-docs/ja/
+  - - meta
+    - property: og:locale
+      content: ja_JP
+---
+
 # openFetch — 日本語 (ja)
 
 **@hamdymohamedak/openfetch** は、標準の [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) を備えた JavaScript ランタイム向けの、依存ゼロの小さな HTTP クライアントです。デフォルト付きインスタンス、リクエスト／レスポンス **インターセプター**、合成可能な **ミドルウェア**、指数バックオフ付き **リトライ**、GET/HEAD 向け **インメモリキャッシュ**、構造化 **エラー**、信頼できない URL 用の任意 **URL ガード** を提供し、React や `window`、レガシー XHR には依存しません。

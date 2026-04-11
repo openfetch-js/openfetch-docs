@@ -1,3 +1,16 @@
+---
+title: openFetch — فارسی
+titleTemplate: false
+description: کلاینت HTTP سبک روی fetch با قطع‌کننده، میان‌افزار، تلاش مجدد و حافظهٔ نهان. بدون وابستگی اجباری به XHR.
+head:
+  - - meta
+    - property: og:url
+      content: https://openfetch-js.github.io/openfetch-docs/fa/
+  - - meta
+    - property: og:locale
+      content: fa_IR
+---
+
 # openFetch — فارسی (fa)
 
 > متن راهنما از چپ‌به‌راست (LTR) برای بلوک‌های کد حفظ شده است؛ عناوین و توضیحات فارسی را می‌توانید در مرورگر یا ویرایگر با جهت RTL بخوانید.

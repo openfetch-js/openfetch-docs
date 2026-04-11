@@ -231,6 +231,7 @@ const localeConfigs = Object.fromEntries(
       lang: string;
       link: string;
       dir?: "ltr" | "rtl";
+      titleTemplate?: string;
       themeConfig: {
         langMenuLabel: string;
         nav: { text: string; link: string }[];
@@ -241,6 +242,7 @@ const localeConfigs = Object.fromEntries(
       label,
       lang: langAttr,
       link: `/${code}/`,
+      titleTemplate: ":title · openFetch",
       themeConfig: {
         langMenuLabel:
           code === "ar"
@@ -276,14 +278,32 @@ const localeConfigs = Object.fromEntries(
   }
 >;
 
+/** Canonical production URL (no trailing slash); pair with `base` for absolute links in meta tags. */
+const SITE_ORIGIN = "https://openfetch-js.github.io/openfetch-docs";
+
 export default defineConfig({
   // GitHub Pages project site: https://openfetch-js.github.io/openfetch-docs/
   base: "/openfetch-docs/",
   title: "openFetch",
+  titleTemplate: ":title · openFetch",
   description:
-    "Documentation for @hamdymohamedak/openfetch — fetch-based HTTP client with interceptors, middleware, retry, and cache.",
+    "Fetch-native HTTP client for Node 18+, browsers, and edge: interceptors, composable middleware, retry, memory cache, typed errors — no XHR dependency.",
   srcExclude: ["README.md", "skills.md"],
   lastUpdated: true,
+  head: [
+    ["meta", { name: "theme-color", content: "#2563eb" }],
+    ["meta", { name: "application-name", content: "openFetch" }],
+    ["meta", { property: "og:site_name", content: "openFetch" }],
+    ["meta", { name: "twitter:card", content: "summary_large_image" }],
+    [
+      "meta",
+      {
+        property: "og:image",
+        content: `${SITE_ORIGIN}/openfetch-logo.jpg`,
+      },
+    ],
+    ["meta", { property: "og:image:alt", content: "openFetch" }],
+  ],
   themeConfig: {
     logo: {
       src: "/openfetch-logo.jpg",

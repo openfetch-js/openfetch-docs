@@ -1,5 +1,30 @@
 ---
 layout: home
+title: openFetch — عميل HTTP مبني على fetch
+titleTemplate: false
+description: معترضات، وسيط، إعادة محاولة، وتخزين مؤقت في الذاكرة على fetch القياسي — Node 18+ والمتصفحات والحافة دون الاعتماد على XHR.
+head:
+  - - meta
+    - property: og:type
+      content: website
+  - - meta
+    - property: og:url
+      content: https://openfetch-js.github.io/openfetch-docs/ar/
+  - - meta
+    - property: og:locale
+      content: ar_SA
+  - - meta
+    - property: og:title
+      content: openFetch — عميل HTTP مبني على fetch
+  - - meta
+    - property: og:description
+      content: معترضات، وسيط، إعادة محاولة، وتخزين مؤقت — دون XHR. Node 18+ والمتصفحات والحافة.
+  - - meta
+    - name: twitter:title
+      content: openFetch — عميل HTTP مبني على fetch
+  - - meta
+    - name: twitter:description
+      content: وثائق openFetch بالعربية — عميل HTTP على fetch.
 
 hero:
   name: openFetch
