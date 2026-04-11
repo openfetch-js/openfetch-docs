@@ -286,6 +286,10 @@ export default defineConfig({
   srcExclude: ["README.md", "skills.md"],
   lastUpdated: true,
   themeConfig: {
+    logo: {
+      src: "/openfetch-logo.jpg",
+      alt: "openFetch",
+    },
     search: { provider: "local" },
     socialLinks: [
       {
