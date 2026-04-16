@@ -1,6 +1,6 @@
 # openFetch — LLM / agent context
 
-> **Package:** `@hamdymohamedak/openfetch` **v0.2.9** — fetch-only HTTP client (ESM). **Node 18+**. No axios / XHR on the transport path.
+> **Package:** `@hamdymohamedak/openfetch` **__OPENFETCH_VERSION_TAG__** — fetch-only HTTP client (ESM). **Node 18+**. No axios / XHR on the transport path.
 
 ## Project
 

@@ -1,11 +1,21 @@
 # openFetch — guidance for AI assistants
 
-Use this file when helping users with **`@hamdymohamedak/openfetch`** (v0.2.x). Prefer facts below over guessing axios-style APIs.
+Use this page when helping users with **`@hamdymohamedak/openfetch` <OpenFetchVersion />** (see [npm](https://www.npmjs.com/package/@hamdymohamedak/openfetch) and the repo `openFetch/package.json`). Prefer facts below over guessing axios-style APIs.
+
+## Agent skills (SKILL.md) and skills.sh
+
+openFetch ships a **portable agent skill** in the main repo under **`openfetchskill/`**: a `SKILL.md` plus optional `references/`, packaged for Claude Code and any tool that loads [Agent Skills](https://agentskills.io/specification)-style directories.
+
+- **Specification:** [agentskills.io/specification](https://agentskills.io/specification) — `SKILL.md` frontmatter (`name`, `description`, …) and body.
+- **Discovery / ecosystem:** [skills.sh](https://skills.sh) — directory and tooling aligned with the same skill format.
+
+Human-facing docs for the library (this site) intentionally stay separate from the skill bundle; this page summarizes API facts for models and points to the skill for full agent-oriented instructions.
 
 ## Canonical links
 
 - Source: https://github.com/openfetch-js/OpenFetch  
 - npm: https://www.npmjs.com/package/@hamdymohamedak/openfetch  
+- Published docs (this site): https://openfetch-js.github.io/openfetch-docs/  
 
 ## What it is
 

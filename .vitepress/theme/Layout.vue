@@ -2,15 +2,21 @@
 import DefaultTheme from "vitepress/theme";
 import { useData } from "vitepress";
 import { computed, onUnmounted, watch } from "vue";
-import HomeFetchAnimation from "../components/HomeFetchAnimation.vue";
+import HeroCodeTyper from "../components/HeroCodeTyper.vue";
+import HomeAskAiButtons from "../components/HomeAskAiButtons.vue";
 
 const { Layout } = DefaultTheme;
 const { page } = useData();
 
-const isRootHome = computed(() => page.value.relativePath === "index.md");
+/** Locale hub homes (e.g. `ar/index.md`) plus English `index.md` — not `languages/index.md`. */
+const isLocaleHome = computed(() => {
+  const p = page.value.relativePath;
+  if (p === "index.md") return true;
+  return /^[a-z]{2}\/index\.md$/.test(p);
+});
 
 watch(
-  isRootHome,
+  isLocaleHome,
   (v) => {
     if (typeof document === "undefined") return;
     document.documentElement.classList.toggle("of-docs-root-home", v);
@@ -27,8 +33,11 @@ onUnmounted(() => {
 
 <template>
   <Layout>
-    <template v-if="isRootHome" #home-hero-image>
-      <HomeFetchAnimation />
+    <template v-if="isLocaleHome" #home-hero-info-after>
+      <HeroCodeTyper />
+    </template>
+    <template v-if="isLocaleHome" #home-hero-actions-after>
+      <HomeAskAiButtons />
     </template>
   </Layout>
 </template>

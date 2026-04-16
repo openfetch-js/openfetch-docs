@@ -96,4 +96,4 @@ Translated locales live under **`ar/`**, **`es/`**, etc. (same filenames where t
 
 ### Package version
 
-Docs are aligned with the library’s public API as of **v0.2.x**. For runtime behavior details and file-level architecture, see `openFetch/docs/PROJECT_FLOW.md`.
+The docs site reads the displayed version from **`.vitepress/openfetch-version.ts`** (single source of truth for pages, hero “Ask ChatGPT / Claude” links, and generated `public/llms.txt`). Bump that file when you cut a release. For runtime behavior details and file-level architecture, see `openFetch/docs/PROJECT_FLOW.md`.

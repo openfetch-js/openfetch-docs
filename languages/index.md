@@ -71,7 +71,7 @@ features:
 
 ### Package
 
-Install **`@hamdymohamedak/openfetch`** from [**npm**](https://www.npmjs.com/package/@hamdymohamedak/openfetch). Source and issues: [**openfetch-js/OpenFetch** on GitHub](https://github.com/openfetch-js/OpenFetch). Docs follow the public API around **v0.2.x**.
+Install **`@hamdymohamedak/openfetch`** from [**npm**](https://www.npmjs.com/package/@hamdymohamedak/openfetch). Source and issues: [**openfetch-js/OpenFetch** on GitHub](https://github.com/openfetch-js/OpenFetch). Docs follow the public API as of **<OpenFetchVersion />**.
 
 Use the **language menu** (globe icon) in the navbar on doc pages to jump to the same page in another locale when a translation exists.
 

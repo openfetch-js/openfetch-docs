@@ -1,4 +1,29 @@
+import { readFileSync, writeFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitepress";
+import {
+  OPENFETCH_VERSION,
+  OPENFETCH_VERSION_TAG,
+} from "./openfetch-version";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+/** Writes `public/llms.txt` from `llms.template.txt` so the shipped file tracks `openfetch-version.ts`. */
+function openfetchLlmsFromTemplatePlugin() {
+  return {
+    name: "openfetch-llms-from-template",
+    buildStart() {
+      const templatePath = resolve(__dirname, "llms.template.txt");
+      const outPath = resolve(__dirname, "../public/llms.txt");
+      const tpl = readFileSync(templatePath, "utf8");
+      const body = tpl
+        .replaceAll("__OPENFETCH_VERSION_TAG__", OPENFETCH_VERSION_TAG)
+        .replaceAll("__OPENFETCH_VERSION__", OPENFETCH_VERSION);
+      writeFileSync(outPath, body);
+    },
+  };
+}
 
 type Lang = "ar" | "es" | "fa" | "fr" | "hi" | "it" | "ja" | "kr" | "ku";
 
@@ -170,6 +195,7 @@ function sidebarRoot() {
         { text: L.architecture, link: "/architecture" },
         { text: L.retryCache, link: "/retry-cache" },
         { text: L.errorsSecurity, link: "/errors-security" },
+        { text: "AI assistants & skills", link: "/skills" },
       ],
     },
   ];
@@ -284,13 +310,38 @@ const SITE_ORIGIN = "https://openfetch-js.github.io/openfetch-docs";
 export default defineConfig({
   // GitHub Pages project site: https://openfetch-js.github.io/openfetch-docs/
   base: "/openfetch-docs/",
+  vite: {
+    plugins: [openfetchLlmsFromTemplatePlugin()],
+  },
   title: "openFetch",
   titleTemplate: ":title · openFetch",
   description:
     "Fetch-native HTTP client for Node 18+, browsers, and edge: interceptors, composable middleware, retry, memory cache, typed errors — no XHR dependency.",
-  srcExclude: ["README.md", "skills.md"],
+  srcExclude: ["README.md"],
   lastUpdated: true,
   head: [
+    [
+      "link",
+      {
+        rel: "preconnect",
+        href: "https://fonts.googleapis.com",
+      },
+    ],
+    [
+      "link",
+      {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossorigin: "",
+      },
+    ],
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap",
+      },
+    ],
     ["meta", { name: "theme-color", content: "#2563eb" }],
     ["meta", { name: "application-name", content: "openFetch" }],
     ["meta", { property: "og:site_name", content: "openFetch" }],
