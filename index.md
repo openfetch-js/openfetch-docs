@@ -1,8 +1,8 @@
 ---
 layout: home
-title: openFetch — HTTP client for the fetch era
+title: openFetch — fetch-native HTTP client
 titleTemplate: false
-description: Interceptors, middleware, retry, and in-memory cache on standard fetch. For Node 18+, Bun, Deno, Workers, modern browsers, and the edge — without XHR.
+description: Interceptors, middleware, retry, and memory cache on standard fetch — for Node 18+, the edge, and modern browsers. No XHR transport.
 head:
   - - meta
     - property: og:type
@@ -15,21 +15,21 @@ head:
       content: en_US
   - - meta
     - property: og:title
-      content: openFetch — HTTP client for the fetch era
+      content: openFetch — fetch-native HTTP client
   - - meta
     - property: og:description
-      content: Interceptors, middleware, retry, and in-memory cache on standard fetch. Node 18+, browsers, and edge — no XHR dependency.
+      content: Interceptors, middleware, retry, and memory cache on standard fetch — Node 18+, the edge, and modern browsers. No XHR transport.
   - - meta
     - name: twitter:title
-      content: openFetch — HTTP client for the fetch era
+      content: openFetch — fetch-native HTTP client
   - - meta
     - name: twitter:description
-      content: Interceptors, middleware, retry, and cache on fetch. Node 18+, browsers, edge.
+      content: Interceptors, middleware, retry, and cache on fetch. Node 18+, edge, browsers — no XHR.
 
 hero:
   name: openFetch
-  text: HTTP client for the fetch era
-  tagline: Interceptors, middleware, retry, and memory cache — zero hard dependency on XHR, built for Node 18+, browsers, and the edge.
+  text: HTTP that feels native to fetch
+  tagline: Interceptors, middleware, retry, and memory cache — no XHR transport, tuned for Node 18+, the edge, and modern browsers.
   actions:
     - theme: brand
       text: Get started

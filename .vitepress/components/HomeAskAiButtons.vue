@@ -1,10 +1,41 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onUnmounted, ref } from "vue";
 import VPButton from "vitepress/dist/client/theme-default/components/VPButton.vue";
+import { withBase } from "vitepress";
 import { OPENFETCH_VERSION } from "../openfetch-version";
 
 const DOCS = "https://openfetch-js.github.io/openfetch-docs/";
 const LLMS = "https://openfetch-js.github.io/openfetch-docs/llms.txt";
+
+/** Same-origin URL so `fetch` works with the configured VitePress `base`. */
+const llmsFetchUrl = withBase("/llms.txt");
+
+const copyLlmsStatus = ref<"idle" | "copied" | "error">("idle");
+const copyLlmsBusy = ref(false);
+let copyLlmsStatusTimer: ReturnType<typeof setTimeout> | undefined;
+
+async function copyLlmsToClipboard() {
+  if (copyLlmsBusy.value) return;
+  copyLlmsBusy.value = true;
+  copyLlmsStatus.value = "idle";
+  if (copyLlmsStatusTimer !== undefined) clearTimeout(copyLlmsStatusTimer);
+
+  try {
+    const res = await fetch(llmsFetchUrl);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    await navigator.clipboard.writeText(text);
+    copyLlmsStatus.value = "copied";
+  } catch {
+    copyLlmsStatus.value = "error";
+  } finally {
+    copyLlmsBusy.value = false;
+    copyLlmsStatusTimer = setTimeout(() => {
+      copyLlmsStatus.value = "idle";
+      copyLlmsStatusTimer = undefined;
+    }, 2500);
+  }
+}
 
 function buildPrompt(who: "ChatGPT" | "Claude") {
   const hi = who === "ChatGPT" ? "Hi ChatGPT!" : "Hi Claude!";
@@ -18,6 +49,10 @@ const chatgptHref = computed(
 const claudeHref = computed(
   () => `https://claude.ai/new?q=${encodeURIComponent(buildPrompt("Claude"))}`,
 );
+
+onUnmounted(() => {
+  if (copyLlmsStatusTimer !== undefined) clearTimeout(copyLlmsStatusTimer);
+});
 </script>
 
 <template>
@@ -44,9 +79,29 @@ const claudeHref = computed(
       </div>
     </div>
     <p class="of-home-ask-ai-hint">
-      Pre-fills a prompt that points at the docs site and <code>llms.txt</code>. If the
-      message box is empty, paste the prompt from the address bar or type it manually —
-      URL prefill behavior depends on the product.
+      Pre-fills a prompt that points at the docs site and
+      <button
+        type="button"
+        class="of-home-ask-ai-llms-copy"
+        :disabled="copyLlmsBusy"
+        title="Copy llms.txt contents to clipboard"
+        @click="copyLlmsToClipboard"
+      >
+        <code>llms.txt</code>
+      </button>. If the message box is empty, paste the prompt from the address bar or type it
+      manually — URL prefill behavior depends on the product.
+      <span
+        v-if="copyLlmsStatus !== 'idle'"
+        class="of-home-ask-ai-copy-feedback"
+        role="status"
+        aria-live="polite"
+      >
+        {{
+          copyLlmsStatus === "copied"
+            ? "Copied llms.txt to clipboard."
+            : "Could not copy — try opening llms.txt in a new tab."
+        }}
+      </span>
     </p>
   </div>
 </template>
@@ -59,9 +114,11 @@ const claudeHref = computed(
 
 .of-home-ask-ai-label {
   margin: 0 0 2px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--vp-c-text-2);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-3);
 }
 
 .actions {
@@ -85,5 +142,41 @@ const claudeHref = computed(
 
 .of-home-ask-ai-hint code {
   font-size: 0.92em;
+}
+
+.of-home-ask-ai-llms-copy {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  vertical-align: baseline;
+}
+
+.of-home-ask-ai-llms-copy:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+.of-home-ask-ai-llms-copy code {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+  color: var(--vp-c-brand-1);
+}
+
+.of-home-ask-ai-llms-copy:hover:not(:disabled) code {
+  color: var(--vp-c-brand-2);
+}
+
+.of-home-ask-ai-copy-feedback {
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--vp-c-brand-1);
 }
 </style>

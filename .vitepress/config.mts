@@ -320,6 +320,28 @@ export default defineConfig({
   srcExclude: ["README.md"],
   lastUpdated: true,
   head: [
+    [
+      "link",
+      {
+        rel: "preconnect",
+        href: "https://fonts.googleapis.com",
+      },
+    ],
+    [
+      "link",
+      {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossorigin: "",
+      },
+    ],
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap",
+      },
+    ],
     ["meta", { name: "theme-color", content: "#2563eb" }],
     ["meta", { name: "application-name", content: "openFetch" }],
     ["meta", { property: "og:site_name", content: "openFetch" }],
