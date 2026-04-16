@@ -115,6 +115,7 @@ openFetch targets teams that want those benefits **while staying on fetch** ever
 6. [Interceptors & middleware](./interceptors-middleware.md) — execution order, `dispatch` internals, `use()`, custom middleware  
 7. [Retry & cache](./retry-cache.md) — retry budgets, idempotency, `createCacheMiddleware`, TTL / SWR  
 8. [Errors & security](./errors-security.md) — `OpenFetchError`, codes, safe logging, `assertSafeHttpUrl`  
+9. [AI assistants & skills](./skills.md) — concise API guidance for models; `SKILL.md` skill bundle and [skills.sh](https://skills.sh) / [Agent Skills](https://agentskills.io/specification) format  
 
 ## Public API (summary)
 

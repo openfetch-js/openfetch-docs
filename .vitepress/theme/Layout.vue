@@ -2,6 +2,7 @@
 import DefaultTheme from "vitepress/theme";
 import { useData } from "vitepress";
 import { computed, onUnmounted, watch } from "vue";
+import HomeAskAiButtons from "../components/HomeAskAiButtons.vue";
 import HomeFetchAnimation from "../components/HomeFetchAnimation.vue";
 
 const { Layout } = DefaultTheme;
@@ -29,6 +30,9 @@ onUnmounted(() => {
   <Layout>
     <template v-if="isRootHome" #home-hero-image>
       <HomeFetchAnimation />
+    </template>
+    <template v-if="isRootHome" #home-hero-actions-after>
+      <HomeAskAiButtons />
     </template>
   </Layout>
 </template>

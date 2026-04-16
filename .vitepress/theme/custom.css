@@ -345,6 +345,26 @@ html {
     min-height: 46px;
     border-radius: 14px;
   }
+
+  .VPHome .VPHero .of-home-ask-ai .actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 100%;
+  }
+
+  .VPHome .VPHero .of-home-ask-ai .action {
+    width: 100%;
+    padding-inline: 0;
+  }
+
+  .VPHome .VPHero .of-home-ask-ai .action .VPButton {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 46px;
+    border-radius: 14px;
+  }
 }
 
 .VPContent.is-home {
@@ -502,5 +522,26 @@ html.of-docs-root-home .VPHome .VPFeatures .item:nth-child(6) {
 @media (prefers-reduced-motion: reduce) {
   html.of-docs-root-home .VPHome .VPFeatures .item {
     animation: none !important;
+  }
+}
+
+/* Ask ChatGPT / Claude row under hero CTAs */
+html.of-docs-root-home .VPHome .VPHero.has-image .of-home-ask-ai {
+  margin-inline: auto;
+  text-align: center;
+}
+
+html.of-docs-root-home .VPHome .VPHero.has-image .of-home-ask-ai .actions {
+  justify-content: center;
+}
+
+@media (min-width: 960px) {
+  html.of-docs-root-home .VPHome .VPHero.has-image .of-home-ask-ai {
+    margin-inline: 0;
+    text-align: start;
+  }
+
+  html.of-docs-root-home .VPHome .VPHero.has-image .of-home-ask-ai .actions {
+    justify-content: flex-start;
   }
 }

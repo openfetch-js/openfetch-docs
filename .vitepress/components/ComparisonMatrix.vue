@@ -129,7 +129,6 @@ const cols = computed(() =>
         {
           id: "openfetch" as const,
           title: "openFetch",
-          tag: "This library",
           brand: true,
         },
         { id: "axios" as const, title: "Axios", tag: null, brand: false },
