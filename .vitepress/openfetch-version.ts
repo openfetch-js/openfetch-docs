@@ -4,6 +4,9 @@
  *
  * Bump this when you publish a new `@hamdymohamedak/openfetch` release.
  */
+/** Published package name on npm (scoped). */
+export const OPENFETCH_NPM_PACKAGE = "@hamdymohamedak/openfetch";
+
 export const OPENFETCH_VERSION = "0.2.9";
 
 /** Display tag, e.g. `v0.2.9` */
