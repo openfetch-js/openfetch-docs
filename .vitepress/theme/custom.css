@@ -191,10 +191,102 @@ html.of-docs-root-home .VPHome .VPHero .actions {
   border: none;
 }
 
+@keyframes of-at-a-glance-line {
+  from {
+    width: 0;
+    opacity: 0.5;
+  }
+  to {
+    width: min(4.75rem, 32vw);
+    opacity: 1;
+  }
+}
+
+@keyframes of-at-a-glance-title {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html.of-docs-root-home .of-at-a-glance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: min(var(--vp-layout-max-width), 100%);
+  margin-inline: auto;
+  margin-top: 0.5rem;
+  box-sizing: border-box;
+}
+
+html.of-docs-root-home .of-at-a-glance h2 {
+  font-family: var(--of-font-display);
+  font-size: clamp(1.32rem, 3.4vw, 1.62rem);
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  margin-top: 2.85rem;
+  margin-bottom: 0.35rem;
+  padding-bottom: 0;
+  border: none;
+  color: var(--vp-c-text-1);
+  text-align: center;
+  width: min(100%, min(56rem, calc(100vw - 2 * var(--of-content-pad-inline, 20px))));
+  animation: of-at-a-glance-title 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.of-docs-root-home .of-at-a-glance h2::after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 0;
+  margin-top: 0.65rem;
+  margin-inline: auto;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--vp-c-brand-1),
+    color-mix(in srgb, var(--vp-c-brand-3) 85%, #818cf8)
+  );
+  animation: of-at-a-glance-line 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.of-docs-root-home .of-at-a-glance h2 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  html.of-docs-root-home .of-at-a-glance h2::after {
+    animation: none;
+    width: min(4.75rem, 32vw);
+    opacity: 1;
+  }
+}
+
+/* Hero copy uses `.main`; home markdown is in `VPHomeContent` → `.vp-doc.container` (no `.main` ancestor). */
 .VPHome .main .vp-doc table {
   display: table;
   width: 100%;
   font-size: 0.92rem;
+}
+
+/* VitePress `.vp-doc table { display: block }` is for raw MD tables — restore real tables for the matrix */
+.VPHome .vp-doc .cmp-matrix__table {
+  display: table !important;
+  width: 100% !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+.VPHome .vp-doc .cmp-matrix__table tr {
+  background-color: transparent;
+  border-top: none;
 }
 
 .VPHome .main .vp-doc th,
@@ -556,6 +648,27 @@ html.of-docs-root-home .VPHome .VPHero:not(.has-image) .main {
 
 html.of-docs-root-home .VPHome .VPHero:not(.has-image) .actions {
   justify-content: center;
+}
+
+/* Locale homes: center hero title + tagline (overrides desktop has-image left stack) */
+html.of-docs-root-home .VPHome .VPHero .tagline {
+  text-align: center;
+}
+
+html.of-docs-root-home .VPHome .VPHero.has-image .heading {
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  html.of-docs-root-home .VPHome .VPHero.has-image .name,
+  html.of-docs-root-home .VPHome .VPHero.has-image .text {
+    text-align: center;
+  }
+
+  html.of-docs-root-home .VPHome .VPHero.has-image .tagline {
+    margin-inline: auto;
+    text-align: center;
+  }
 }
 
 /* Two-column grid when hero has artwork */

@@ -56,9 +56,13 @@ features:
     details: No window assumption — suitable for SSR, APIs, and React Server Components patterns.
 ---
 
+<div class="of-at-a-glance">
+
 ## At a glance
 
 <ComparisonMatrix />
+
+</div>
 
 ## Same request — three HTTP clients
 

@@ -56,9 +56,13 @@ features:
     details: دون افتراض وجود window — مناسب لـ SSR وواجهات API وأنماط React Server Components.
 ---
 
+<div class="of-at-a-glance">
+
 ## نظرة سريعة
 
 <ComparisonMatrix locale="ar" />
+
+</div>
 
 ## نفس الطلب — ثلاثة عملاء HTTP
 
