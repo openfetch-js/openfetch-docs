@@ -15,8 +15,7 @@ Human-facing docs for the library (this site) intentionally stay separate from t
 
 - Source: https://github.com/openfetch-js/OpenFetch  
 - npm: https://www.npmjs.com/package/@hamdymohamedak/openfetch  
-- Published docs (this site): https://openfetch-js.github.io/openfetch-docs/  
-
+- openFetch-Skills: https://github.com/openfetch-js/openFetchSkill
 ## What it is
 
 - ESM-only package; **one implementation: `fetch`**. No XMLHttpRequest.

@@ -3,6 +3,7 @@ import DefaultTheme from "vitepress/theme";
 import { useData } from "vitepress";
 import { computed, onUnmounted, watch } from "vue";
 import HeroCodeTyper from "../components/HeroCodeTyper.vue";
+import HeroBundlePhobiaButton from "../components/HeroBundlePhobiaButton.vue";
 import HeroNpmDownloads from "../components/HeroNpmDownloads.vue";
 import HomeAskAiButtons from "../components/HomeAskAiButtons.vue";
 
@@ -39,6 +40,7 @@ onUnmounted(() => {
     </template>
     <template v-if="isLocaleHome" #home-hero-actions-after>
       <HomeAskAiButtons />
+      <HeroBundlePhobiaButton />
       <HeroNpmDownloads />
     </template>
   </Layout>
