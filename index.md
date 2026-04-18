@@ -2,7 +2,7 @@
 layout: home
 title: openFetch — fetch-native HTTP client
 titleTemplate: false
-description: Interceptors, middleware, retry, and memory cache on standard fetch — for Node 18+, the edge, and modern browsers. No XHR transport.
+description: Fetch-native HTTP client with interceptors, middleware, Standard Schema JSON, retry lifecycle hooks, memory cache, and Ky-style ergonomics — Node 18+, edge, browsers. No XHR.
 head:
   - - meta
     - property: og:type
@@ -18,18 +18,18 @@ head:
       content: openFetch — fetch-native HTTP client
   - - meta
     - property: og:description
-      content: Interceptors, middleware, retry, and memory cache on standard fetch — Node 18+, the edge, and modern browsers. No XHR transport.
+      content: Interceptors, middleware, Standard Schema JSON, retry hooks, memory cache on fetch — Node 18+, edge, browsers. No XHR.
   - - meta
     - name: twitter:title
       content: openFetch — fetch-native HTTP client
   - - meta
     - name: twitter:description
-      content: Interceptors, middleware, retry, and cache on fetch. Node 18+, edge, browsers — no XHR.
+      content: Standard Schema JSON, retry lifecycle hooks, interceptors, middleware, cache on fetch. Node 18+, edge — no XHR.
 
 hero:
   name: openFetch
   text: HTTP that feels native to fetch
-  tagline: Interceptors, middleware, retry, and memory cache — no XHR transport, tuned for Node 18+, the edge, and modern browsers.
+  tagline: Interceptors, middleware, Standard Schema JSON, retry lifecycle hooks, and memory cache — fetch-only for Node 18+, the edge, and modern browsers.
   actions:
     - theme: brand
       text: Get started
@@ -61,6 +61,8 @@ features:
 <div class="of-at-a-glance">
 
 ## At a glance
+
+**What’s new in openFetch:** validated JSON with **[Standard Schema](https://github.com/standard-schema/standard-schema)** (`jsonSchema` on the config and **`.json(schema)`** on the fluent client), **Ky-style `throwHttpErrors`** (alongside `validateStatus`), native **`Request`** as `request()` input, synchronous **`init[]`** hooks on the merged config, **`ERR_TIMEOUT`** separate from user **`AbortSignal`** cancel, **retry `onAfterResponse` / `onBeforeRetry`** with **`OpenFetchForceRetry`**, suggested **`Accept`** from `responseType`, and **type guards** (`isHTTPError`, `isTimeoutError`, `isSchemaValidationError`). **[Full feature list & request pipeline →](./features-pipeline.md)**
 
 <ComparisonMatrix />
 

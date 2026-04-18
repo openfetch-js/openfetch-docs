@@ -29,7 +29,7 @@ head:
 hero:
   name: openFetch
   text: عميل HTTP مبني على fetch
-  tagline: معترضات، وسيط، إعادة محاولة، وتخزين مؤقت في الذاكرة — دون الاعتماد على XHR، جاهز لـ Node 18+ والمتصفحات والحافة.
+  tagline: معترضات، وسيط، JSON بمخطط Standard Schema، خطافات دورة إعادة المحاولة، وتخزين مؤقت — fetch فقط لـ Node 18+ والمتصفحات والحافة.
   actions:
     - theme: brand
       text: ابدأ الآن
@@ -54,11 +54,15 @@ features:
     details: استورد نواة العميل أو أضف الإضافات وواجهة السلاسة من مسارات فرعية مخصصة.
   - title: مناسب لمكوّنات الخادم
     details: دون افتراض وجود window — مناسب لـ SSR وواجهات API وأنماط React Server Components.
+  - title: التحقق من JSON وسلوك قريب من Ky
+    details: Standard Schema اختياري، throwHttpErrors، Request كمدخل، init متزامن، وإعادة محاولة مع OpenFetchForceRetry — انظر «الميزات ومسار الطلب».
 ---
 
 <div class="of-at-a-glance">
 
 ## نظرة سريعة
+
+**أبرز ما في openFetch الآن:** التحقق من JSON عبر **Standard Schema** (`jsonSchema` و**`.json(schema)`** في الـ fluent)، **`throwHttpErrors`** بأسلوب Ky مع **`validateStatus`**, تمرير **`Request`** الأصلي إلى **`request()`**، مصفوفة **`init[]`** متزامنة على الإعداد المدمج، **`ERR_TIMEOUT`** منفصل عن إلغاء المستخدم، خطافات إعادة المحاولة **`onAfterResponse` / `onBeforeRetry`** مع **`OpenFetchForceRetry`**, **`Accept`** مقترح من **`responseType`**, و**type guards** (`isHTTPError`، `isTimeoutError`، `isSchemaValidationError`). **[قائمة الميزات ومسار الطلب الكامل ←](./features-pipeline.md)**
 
 <ComparisonMatrix locale="ar" />
 
