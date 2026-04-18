@@ -10,7 +10,7 @@
 - **This file (machine-oriented summary):** https://openfetch-js.github.io/openfetch-docs/llms.txt
 - VitePress `base` is `/openfetch-docs/` — prefix relative doc paths below with that base when resolving URLs (e.g. `/skills` → `https://openfetch-js.github.io/openfetch-docs/skills`).
 - Path map: English at `/` (default), locale hubs at `/ar/`, `/es/`, …, hub at `/languages/`.
-- Monorepo package layout & request lifecycle: `openFetch/docs/PROJECT_FLOW.md` in the GitHub repo.
+- Package layout & request lifecycle: [docs/PROJECT_FLOW.md](https://github.com/openfetch-js/OpenFetch/blob/main/docs/PROJECT_FLOW.md) in the library repo.
 
 ## Install & import
 
@@ -105,7 +105,7 @@ import { createFluentClient } from "@hamdymohamedak/openfetch/sugar";
 
 ## Agent skills (Cursor, Claude Code, compatible tools)
 
-The repo includes **`openfetchskill/`** — a **`SKILL.md`** skill aligned with the [Agent Skills specification](https://agentskills.io/specification) (YAML frontmatter + Markdown). Ecosystem hub: [skills.sh](https://skills.sh). Human docs page: `/skills` on the site above.
+Published plugin: **[openfetch-js/openFetchSkill](https://github.com/openfetch-js/openFetchSkill)** (`SKILL.md` + `references/`). The same folder exists as **`openfetchskill/`** in **[openfetch-js/OpenFetch](https://github.com/openfetch-js/OpenFetch)**. Spec: [Agent Skills](https://agentskills.io/specification). Hub: [skills.sh](https://skills.sh). Human overview: [openfetch-docs `/skills`](https://openfetch-js.github.io/openfetch-docs/skills).
 
 ## Human readers
 

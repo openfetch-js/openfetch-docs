@@ -38,6 +38,7 @@ type NavLabels = {
   pluginsFluent: string;
   interceptors: string;
   architecture: string;
+  featuresPipeline: string;
   retryCache: string;
   errorsSecurity: string;
 };
@@ -52,6 +53,7 @@ const LABELS: Record<Lang, NavLabels> = {
     pluginsFluent: "الإضافات والواجهة السلسة",
     interceptors: "المعترضات والوسيط",
     architecture: "البنية والداخلية",
+    featuresPipeline: "الميزات ومسار الطلب",
     retryCache: "إعادة المحاولة والتخزين المؤقت",
     errorsSecurity: "الأخطاء والأمان",
   },
@@ -64,6 +66,7 @@ const LABELS: Record<Lang, NavLabels> = {
     pluginsFluent: "Plugins y API fluida",
     interceptors: "Interceptores y middleware",
     architecture: "Arquitectura",
+    featuresPipeline: "Funciones y pipeline",
     retryCache: "Reintentos y caché",
     errorsSecurity: "Errores y seguridad",
   },
@@ -76,6 +79,7 @@ const LABELS: Record<Lang, NavLabels> = {
     pluginsFluent: "افزونه‌ها و API روان",
     interceptors: "قطع‌کننده‌ها و میان‌افزار",
     architecture: "معماری",
+    featuresPipeline: "ویژگی‌ها و خط لوله",
     retryCache: "تلاش مجدد و حافظهٔ نهان",
     errorsSecurity: "خطا و امنیت",
   },
@@ -88,6 +92,7 @@ const LABELS: Record<Lang, NavLabels> = {
     pluginsFluent: "Plugins et API fluent",
     interceptors: "Intercepteurs et middleware",
     architecture: "Architecture",
+    featuresPipeline: "Fonctionnalités et pipeline",
     retryCache: "Nouvelles tentatives et cache",
     errorsSecurity: "Erreurs et sécurité",
   },
@@ -100,6 +105,7 @@ const LABELS: Record<Lang, NavLabels> = {
     pluginsFluent: "प्लगइन और फ्लुएंट API",
     interceptors: "इंटरसेप्टर और मिडलवेयर",
     architecture: "Architecture",
+    featuresPipeline: "Features और pipeline",
     retryCache: "रीट्राई और कैश",
     errorsSecurity: "त्रुटियाँ और सुरक्षा",
   },
@@ -112,6 +118,7 @@ const LABELS: Record<Lang, NavLabels> = {
     pluginsFluent: "Plugin e API fluent",
     interceptors: "Intercettori e middleware",
     architecture: "Architettura",
+    featuresPipeline: "Funzionalità e pipeline",
     retryCache: "Retry e cache",
     errorsSecurity: "Errori e sicurezza",
   },
@@ -124,6 +131,7 @@ const LABELS: Record<Lang, NavLabels> = {
     pluginsFluent: "プラグインと Fluent API",
     interceptors: "インターセプターとミドルウェア",
     architecture: "アーキテクチャ",
+    featuresPipeline: "機能とパイプライン",
     retryCache: "リトライとキャッシュ",
     errorsSecurity: "エラーとセキュリティ",
   },
@@ -136,6 +144,7 @@ const LABELS: Record<Lang, NavLabels> = {
     pluginsFluent: "플러그인과 Fluent API",
     interceptors: "인터셉터와 미들웨어",
     architecture: "아키텍처",
+    featuresPipeline: "기능과 파이프라인",
     retryCache: "재시도와 캐시",
     errorsSecurity: "오류와 보안",
   },
@@ -148,6 +157,7 @@ const LABELS: Record<Lang, NavLabels> = {
     pluginsFluent: "Plugin û Fluent API",
     interceptors: "Interceptors û middleware",
     architecture: "Mîmarî",
+    featuresPipeline: "Taybetmendî û pipeline",
     retryCache: "Retry û cache",
     errorsSecurity: "Çewtî û ewlehî",
   },
@@ -162,6 +172,7 @@ const ROOT_LABELS: NavLabels = {
   pluginsFluent: "Plugins & fluent API",
   interceptors: "Interceptors & middleware",
   architecture: "Architecture & internals",
+  featuresPipeline: "Features & pipeline",
   retryCache: "Retry & cache",
   errorsSecurity: "Errors & security",
 };
@@ -193,6 +204,7 @@ function sidebarRoot() {
         { text: L.pluginsFluent, link: "/plugins-fluent" },
         { text: L.interceptors, link: "/interceptors-middleware" },
         { text: L.architecture, link: "/architecture" },
+        { text: L.featuresPipeline, link: "/features-pipeline" },
         { text: L.retryCache, link: "/retry-cache" },
         { text: L.errorsSecurity, link: "/errors-security" },
         { text: "AI assistants & skills", link: "/skills" },
@@ -224,6 +236,10 @@ function sidebarFor(lang: Lang) {
     { text: L.pluginsFluent, link: pluginsFluentLink },
     { text: L.interceptors, link: `${p}/interceptors-middleware` },
     { text: L.architecture, link: architectureLink },
+    {
+      text: L.featuresPipeline,
+      link: lang === "ar" ? `${p}/features-pipeline` : "/features-pipeline",
+    },
     { text: L.retryCache, link: `${p}/retry-cache` },
     { text: L.errorsSecurity, link: `${p}/errors-security` },
   );

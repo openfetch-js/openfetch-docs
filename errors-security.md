@@ -16,12 +16,22 @@ Subclass of `Error` with optional:
 | `ERR_BAD_RESPONSE` | HTTP status failed `validateStatus` |
 | `ERR_NETWORK` | Network / unexpected throw from `fetch` |
 | `ERR_PARSE` | Response body could not be parsed |
-| `ERR_CANCELED` | Aborted (timeout or external signal) |
+| `ERR_CANCELED` | Aborted (typically external `signal` or user abort) |
+| `ERR_TIMEOUT` | Per-request **`timeout`** elapsed (internal timer aborted `fetch` before user signal) |
 | `ERR_RETRY_TIMEOUT` | Total retry budget (`retry.timeoutTotalMs`) exceeded (monotonic clock) |
 
 ## `isOpenFetchError`
 
 Type guard: `err is OpenFetchError`.
+
+## `isHTTPError` / `isTimeoutError`
+
+- **`isHTTPError(err)`** — `OpenFetchError` with **`code === "ERR_BAD_RESPONSE"`** and a **`response`** attached.
+- **`isTimeoutError(err)`** — `OpenFetchError` with **`ERR_TIMEOUT`** (per-attempt fetch timeout) or **`ERR_RETRY_TIMEOUT`** (whole retry sequence budget).
+
+## `SchemaValidationError` / `isSchemaValidationError`
+
+Thrown when **`jsonSchema`** or fluent **`.json(schema)`** validation fails. **Not** an `OpenFetchError` (the HTTP round-trip succeeded; the schema rejected the body). Use **`isSchemaValidationError`** for narrowing.
 
 ## Logging — `toShape()` / `toJSON()`
 

@@ -1,10 +1,10 @@
 # openFetch — guidance for AI assistants
 
-Use this page when helping users with **`@hamdymohamedak/openfetch` <OpenFetchVersion />** (see [npm](https://www.npmjs.com/package/@hamdymohamedak/openfetch) and the repo `openFetch/package.json`). Prefer facts below over guessing axios-style APIs.
+Use this page when helping users with **`@hamdymohamedak/openfetch` <OpenFetchVersion />** (see [npm](https://www.npmjs.com/package/@hamdymohamedak/openfetch) and [`package.json` in the library repo](https://github.com/openfetch-js/OpenFetch/blob/main/package.json)). Prefer facts below over guessing axios-style APIs.
 
 ## Agent skills (SKILL.md) and skills.sh
 
-openFetch ships a **portable agent skill** in the main repo under **`openfetchskill/`**: a `SKILL.md` plus optional `references/`, packaged for Claude Code and any tool that loads [Agent Skills](https://agentskills.io/specification)-style directories.
+The **[openfetch-js/OpenFetch](https://github.com/openfetch-js/OpenFetch)** monorepo includes **`openfetchskill/`** (mirrored for installs as **[openfetch-js/openFetchSkill](https://github.com/openfetch-js/openFetchSkill)**): a `SKILL.md` plus optional `references/`, packaged for Claude Code and any tool that loads [Agent Skills](https://agentskills.io/specification)-style directories.
 
 - **Specification:** [agentskills.io/specification](https://agentskills.io/specification) — `SKILL.md` frontmatter (`name`, `description`, …) and body.
 - **Discovery / ecosystem:** [skills.sh](https://skills.sh) — directory and tooling aligned with the same skill format.
@@ -13,9 +13,10 @@ Human-facing docs for the library (this site) intentionally stay separate from t
 
 ## Canonical links
 
-- Source: https://github.com/openfetch-js/OpenFetch  
-- npm: https://www.npmjs.com/package/@hamdymohamedak/openfetch  
-- openFetch-Skills: https://github.com/openfetch-js/openFetchSkill
+- **Library source:** [github.com/openfetch-js/OpenFetch](https://github.com/openfetch-js/OpenFetch)
+- **npm:** [npmjs.com/package/@hamdymohamedak/openfetch](https://www.npmjs.com/package/@hamdymohamedak/openfetch)
+- **Published agent skill (Claude Code plugin):** [github.com/openfetch-js/openFetchSkill](https://github.com/openfetch-js/openFetchSkill)
+
 ## What it is
 
 - ESM-only package; **one implementation: `fetch`**. No XMLHttpRequest.
