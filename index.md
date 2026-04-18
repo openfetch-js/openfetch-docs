@@ -54,6 +54,8 @@ features:
     details: Import the core client or add plugins and the fluent sugar API from dedicated subpaths.
   - title: Server components friendly
     details: No window assumption — suitable for SSR, APIs, and React Server Components patterns.
+  - title: Schema validation & Ky-style ergonomics
+    details: Optional Standard Schema on JSON, throwHttpErrors, native Request input, sync init hooks, retry onAfterResponse / OpenFetchForceRetry — see Features & pipeline.
 ---
 
 <div class="of-at-a-glance">
@@ -115,11 +117,12 @@ openFetch targets teams that want those benefits **while staying on fetch** ever
 2. [HTTP methods](./http-methods.md) — GET, POST, PUT, PATCH, DELETE, `request()`, bodies and query params  
 3. [React & Vue](./framework-guides.md) — hooks, composables, shared clients, RSC notes  
 4. [Configuration](./configuration.md) — full request config, `rawResponse`, merge rules, helper exports  
-5. [Plugins & fluent API](./getting-started.md#subpath-imports-tree-shaking) — `@hamdymohamedak/openfetch/plugins`, `@hamdymohamedak/openfetch/sugar`  
-6. [Interceptors & middleware](./interceptors-middleware.md) — execution order, `dispatch` internals, `use()`, custom middleware  
-7. [Retry & cache](./retry-cache.md) — retry budgets, idempotency, `createCacheMiddleware`, TTL / SWR  
-8. [Errors & security](./errors-security.md) — `OpenFetchError`, codes, safe logging, `assertSafeHttpUrl`  
-9. [AI assistants & skills](./skills.md) — concise API guidance for models; `SKILL.md` skill bundle and [skills.sh](https://skills.sh) / [Agent Skills](https://agentskills.io/specification) format  
+5. [Features & request pipeline](./features-pipeline.md) — full feature list, merge → dispatch diagrams, retry hooks  
+6. [Plugins & fluent API](./plugins-fluent.md) — `@hamdymohamedak/openfetch/plugins`, `@hamdymohamedak/openfetch/sugar`  
+7. [Interceptors & middleware](./interceptors-middleware.md) — execution order, `dispatch` internals, `use()`, custom middleware  
+8. [Retry & cache](./retry-cache.md) — retry budgets, idempotency, `createCacheMiddleware`, TTL / SWR  
+9. [Errors & security](./errors-security.md) — `OpenFetchError`, codes, guards, safe logging, `assertSafeHttpUrl`  
+10. [AI assistants & skills](./skills.md) — concise API guidance for models; `SKILL.md` skill bundle and [skills.sh](https://skills.sh) / [Agent Skills](https://agentskills.io/specification) format  
 
 ## Public API (summary)
 
@@ -129,7 +132,10 @@ openFetch targets teams that want those benefits **while staying on fetch** ever
 | `createClient` / `create` | New client with optional `initialDefaults` |
 | `createFluentClient` | Callable fluent URL chains (from `/sugar`) |
 | `retry`, `timeout`, `hooks`, `debug`, `strictFetch` | Middleware plugins (from `/plugins`) |
-| `OpenFetchError`, `isOpenFetchError` | Typed errors + type guard |
+| `OpenFetchError`, `isOpenFetchError`, `isHTTPError`, `isTimeoutError` | Typed errors + guards |
+| `SchemaValidationError`, `isSchemaValidationError` | Standard Schema failures on JSON |
+| `OpenFetchForceRetry`, `isOpenFetchForceRetry` | Force another retry attempt from `onAfterResponse` |
+| Standard Schema types | `StandardSchemaV1`, `StandardSchemaV1InferOutput`, … |
 | `InterceptorManager` | Low-level interceptor stack |
 | `createRetryMiddleware` | Retry middleware factory |
 | `MemoryCacheStore`, `createCacheMiddleware`, `appendCacheKeyVaryHeaders` | In-memory cache |

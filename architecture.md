@@ -2,6 +2,8 @@
 
 This page is the **recommended “single home”** for how openFetch is put together: a **request/response diagram**, a **precise comparison to Axios internals**, a short **design review**, and **annotated walkthroughs** of `retry.ts` and `cache.ts` (grouped by line ranges for readability).
 
+For the **full feature list** and **exact dispatch/retry ordering**, see [Features & request pipeline](./features-pipeline.md).
+
 For day-to-day usage, start with [Getting started](./getting-started.md) and [Interceptors & middleware](./interceptors-middleware.md).
 
 ## Layered architecture
@@ -55,12 +57,13 @@ sequenceDiagram
 
   U->>C: get/post/request(...)
   C->>C: mergeConfig(defaults, call)
+  C->>C: init hooks (sync) on merged config
   C->>RI: runRequest(merged)
   RI-->>C: afterRequest config
   C->>M: applyMiddlewares(ctx, inner)
   Note over M: Outer middleware runs first; inner calls next()
   M->>D: inner: dispatch(cfg)
-  D->>D: transformRequest, fetch, parse, validateStatus
+  D->>D: transformRequest, fetch, parse, validateStatus, jsonSchema?, transformResponse
   D-->>M: OpenFetchResponse
   M-->>C: ctx.response
   C->>V: runResponse(response)
@@ -122,7 +125,7 @@ Both libraries expose a familiar **instance + defaults + interceptors** DX. Inte
 
 ## `retry.ts` — annotated source
 
-Line numbers refer to **`src/core/retry.ts`** in the published **@hamdymohamedak/openfetch** package (see the GitHub repo linked from the site footer).
+Line numbers refer to **`openFetch/src/runtime/retry.ts`** in the **OpenFetch** repo (see the GitHub link in the site footer).
 
 | Lines | What it does |
 |-------|----------------|
@@ -142,13 +145,13 @@ Line numbers refer to **`src/core/retry.ts`** in the published **@hamdymohamedak
 | 158–166 | **`throwRetryDeadlineExceeded()`** — **`ERR_RETRY_TIMEOUT`** when total budget exceeded. |
 | 168–176 | **`assertWithinRetryDeadline()`** — cheap check before work. |
 | 178–199 | **`builtinShouldRetry()`** — interprets **`OpenFetchError`**: no retry on **`ERR_CANCELED`** / **`ERR_RETRY_TIMEOUT`**; **`ERR_BAD_RESPONSE`** retries if status is in `retryOnStatus` and method policy allows; **`ERR_NETWORK` / `ERR_PARSE`** if `retryOnNetworkError` and method policy allows. Unknown errors: optional network retry. |
-| 218–300 | **`createRetryMiddleware()`** — main loop: increment **`attempt`**, check external abort + deadline, optionally set **`timeoutPerAttemptMs`** on `ctx.request`, apply POST idempotency header, then either **simple `await next()`** (no total deadline) or **merge deadline `AbortSignal`** with user signal so **in-flight fetch aborts** when total budget ends (`enforceTotalTimeout`). On success returns; on failure, if attempts exhausted rethrow; else **`builtinShouldRetry` × `shouldRetry`**, then **`sleepBackoff`** with delay capped by remaining monotonic budget, then loop. |
+| 218–310+ | **`createRetryMiddleware()`** — main loop: increment **`attempt`**, check external abort + deadline, optionally set **`timeoutPerAttemptMs`** on `ctx.request`, apply POST idempotency header, then either **simple `await next()`** (no total deadline) or **merge deadline `AbortSignal`** with user signal so **in-flight fetch aborts** when total budget ends (`enforceTotalTimeout`). On success runs **`onAfterResponse`** then returns (unless that hook throws **`OpenFetchForceRetry`**, which re-enters the failure path). On failure, if attempts exhausted rethrow; else **`builtinShouldRetry` × `shouldRetry`** (includes **`OpenFetchForceRetry`**), then **`onBeforeRetry`**, then **`sleepBackoff`** with delay capped by remaining monotonic budget, then loop. |
 
 ---
 
 ## `cache.ts` — annotated source
 
-Same layout: **`src/core/cache.ts`** in the package source tree.
+Same layout: **`openFetch/src/runtime/cache.ts`** in the package source tree.
 
 | Lines | What it does |
 |-------|----------------|
@@ -164,6 +167,7 @@ Same layout: **`src/core/cache.ts`** in the package source tree.
 
 ## Related reading
 
+- [Features & request pipeline](./features-pipeline.md) — feature inventory + pipeline charts  
 - [Plugins & fluent API](./plugins-fluent.md) — subpath imports, plugin stack, fluent client  
 - [Interceptors & middleware](./interceptors-middleware.md) — order and mental model  
 - [Retry & cache](./retry-cache.md) — user-facing options and examples  

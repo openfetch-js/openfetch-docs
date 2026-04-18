@@ -25,15 +25,22 @@ Configuration is merged from **client defaults** and **per-call** options via `m
 
 ### Timeouts and cancellation
 
-- **`timeout`** — Milliseconds; uses an internal `AbortController` merged with **`signal`** via `mergeAbortSignals`.
+- **`timeout`** — Milliseconds; uses an internal `AbortController` merged with **`signal`** via `mergeAbortSignals`. When the **internal** timeout fires first (user signal not aborted), the error code is **`ERR_TIMEOUT`**. Pure user abort → **`ERR_CANCELED`**.
 - **`signal`** — External `AbortSignal`; combined with timeout abort.
 
 ### Response handling
 
 - **`responseType`** — `"json"` | `"text"` | `"arraybuffer"` | `"blob"` | `"stream"`.  
-  If omitted, dispatch infers JSON from `Content-Type: application/json`, otherwise reads as text.
+  If omitted, dispatch infers JSON from `Content-Type: application/json`, otherwise reads as text. When **`responseType`** is set and **`accept`** is missing, dispatch sets a **suggested `Accept`** header (e.g. `application/json` for `json`).
 - **`rawResponse`** — When **`true`**, **`dispatch`** returns an **`OpenFetchResponse`** whose **`data`** is the native **`Response`** with an **unread body**. Body parsing and the **`transformResponse`** chain are **skipped**. **Request** interceptors still ran earlier; **response** interceptors still run and see `data` as that `Response`. Middleware that expects parsed JSON in **`ctx.response.data`** will not see transforms until you call **`response.json()`** / **`text()`** yourself. Pair with **`cloneResponse`** (package export) if you need two independent reads of the same `Response`.
 - **`validateStatus`** — `(status: number) => boolean`. Default: 200–299 inclusive. If false, throws **`OpenFetchError`** with code `ERR_BAD_RESPONSE` and attaches the response.
+- **`throwHttpErrors`** — Used **only when `validateStatus` is omitted**. Ky-style control: `false` means never throw on HTTP status (same as `validateStatus: () => true`). A function `(status) => boolean` means **throw** when it returns **`true`** for that status. If **`validateStatus`** is provided, **`throwHttpErrors` is ignored**.
+- **`jsonSchema`** — Optional [Standard Schema](https://github.com/standard-schema/standard-schema) (e.g. Zod 3.24+) applied to **parsed JSON** after a **successful** `validateStatus`. On failure throws **`SchemaValidationError`** (not `OpenFetchError`). Runs **before** the **`transformResponse`** chain.
+- **`init`** — Array of **synchronous** `(config) => void` callbacks on the **merged** config, after `mergeConfig` and **before** request interceptors. Use to attach headers, tweak options, etc.
+
+### Request input
+
+- Besides `string | URL` and a config object, **`client.request(nativeRequest, overrides?)`** accepts a **`Request`**. URL, method, headers, body, `signal`, and supported `RequestInit` fields are copied from the `Request`, then **shallow-overridden** by merged defaults + `overrides`.
 
 ### Transforms
 
@@ -79,6 +86,10 @@ Useful when building tooling, logs, or custom middleware:
 | `cloneResponse(res)` | Clone a native `Response` so the body can be read more than once. |
 | `generateIdempotencyKey`, `hasIdempotencyKeyHeader`, `ensureIdempotencyKeyHeader` | Helpers for POST retry idempotency (see [Retry & cache](./retry-cache.md)). |
 | `InterceptorManager` | Low-level stack; normally you use `client.interceptors`. |
+| `SchemaValidationError`, `isSchemaValidationError` | Standard Schema failures on `jsonSchema` / fluent `.json(schema)`. |
+| `OpenFetchForceRetry`, `isOpenFetchForceRetry` | Throw from `retry.onAfterResponse` to force another attempt. |
+| `isHTTPError`, `isTimeoutError` | Narrow `OpenFetchError` by `code` / semantics. |
+| Standard Schema types | `StandardSchemaV1`, `StandardSchemaV1InferOutput`, … (types only). |
 | Types | `OpenFetchConfig`, `OpenFetchResponse`, `Middleware`, `OpenFetchContext`, … |
 
 Plugins and fluent client live under **`@hamdymohamedak/openfetch/plugins`** and **`/sugar`** — see [Plugins & fluent API](./plugins-fluent.md).
@@ -87,8 +98,8 @@ Plugins and fluent client live under **`@hamdymohamedak/openfetch/plugins`** and
 
 - Top-level keys: later config wins.
 - **`headers`**: shallow merge; per-call headers override defaults.
-- **`middlewares`**, **`transformRequest`**, **`transformResponse`**: **concatenated** (defaults first, then call-specific).
-- **`retry`**, **`memoryCache`**: shallow merge of objects.
+- **`middlewares`**, **`transformRequest`**, **`transformResponse`**, **`init`**: **concatenated** (defaults first, then call-specific).
+- **`retry`**, **`memoryCache`**: shallow merge of scalar fields; **`retry.onBeforeRetry`** and **`retry.onAfterResponse`** are **composed** (defaults run first, then per-call).
 - Prototype-pollution keys (`__proto__`, `constructor`, `prototype`) are stripped from merged objects and nested `headers` / `retry` / `memoryCache`.
 
 ## Quick checklist (common options)
@@ -109,5 +120,6 @@ Plugins and fluent client live under **`@hamdymohamedak/openfetch/plugins`** and
 
 ## Next
 
+- [Features & request pipeline](./features-pipeline.md) — full feature list and diagrams  
 - [Plugins & fluent API](./plugins-fluent.md)  
 - [Interceptors & middleware](./interceptors-middleware.md)

@@ -2,24 +2,26 @@
 
 ## Request lifecycle (short)
 
-1. Merge **defaults** + call config.  
-2. Run **request interceptors** on the config.  
-3. Build **`OpenFetchContext`** (`url`, `request`, `response`, `error`).  
-4. Run **middleware** stack; innermost calls **`dispatch`** (`fetch` + parse + validate + response transforms).  
-5. Run **response interceptors** on the successful response.  
-6. Return full response or `data` if `unwrapResponse`.
+1. Merge **defaults** + call config (`mergeConfig`; supports merging a native **`Request`**).  
+2. Run **`init`** hooks — **synchronous** `(config) => void` array on the merged config.  
+3. Run **request interceptors** on the config.  
+4. Build **`OpenFetchContext`** (`url`, `request`, `response`, `error`).  
+5. Run **middleware** stack; innermost calls **`dispatch`** (`fetch` + parse + validate + optional Standard Schema + response transforms). Retry middleware may call **`next()`** multiple times per client call.  
+6. Run **response interceptors** on the successful response.  
+7. Return full response or `data` if `unwrapResponse`.
 
-See [Architecture & internals](./architecture.md) for diagrams, or the repo’s `openFetch/docs/PROJECT_FLOW.md` for a file map.
+See [Features & request pipeline](./features-pipeline.md) for the full diagram, [Architecture & internals](./architecture.md) for comparisons, or the repo’s `openFetch/docs/PROJECT_FLOW.md` for a file map.
 
 ### Inside `dispatch` (after `next()` reaches core)
 
 Order matters for debugging transforms and errors:
 
 1. **`transformRequest`** — each function receives `(data, headers)`; may change body and headers before `fetch`.
-2. **`fetch`** — single call with merged `RequestInit` + computed URL/body.
+2. **`fetch`** — single call with merged `RequestInit` + computed URL/body (optional suggested **`Accept`** from **`responseType`**).
 3. **Body parse** — unless **`rawResponse`** is true: JSON/text/blob/etc. per **`responseType`** or `Content-Type`.
-4. **`validateStatus`** — failure throws **`OpenFetchError`** (`ERR_BAD_RESPONSE`) with response attached.
-5. **`transformResponse`** — skipped when **`rawResponse`** is true.
+4. **`validateStatus`** (or derived from **`throwHttpErrors`** when `validateStatus` is omitted) — failure throws **`OpenFetchError`** (`ERR_BAD_RESPONSE`) with response attached (including parsed body when not `rawResponse`).
+5. **`jsonSchema`** — optional Standard Schema validation of parsed JSON; failure throws **`SchemaValidationError`**.
+6. **`transformResponse`** — skipped when **`rawResponse`** is true.
 
 **Response interceptors** run on the resulting **`OpenFetchResponse`** (so for `rawResponse`, `data` is still the native **`Response`**).
 

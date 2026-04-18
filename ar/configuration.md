@@ -1,6 +1,6 @@
 # الإعدادات
 
-يُدمج الإعداد من **افتراضيات العميل** و**خيارات كل استدعاء** عبر `mergeConfig` (انظر قواعد الدمج أدناه).
+يُدمج الإعداد من **افتراضيات العميل** و**خيارات كل استدعاء** عبر `mergeConfig` (انظر قواعد الدمج أدناه). للصورة الكاملة للمسار والميزات الجديدة راجع [الميزات ومسار الطلب](./features-pipeline.md).
 
 ## `OpenFetchConfig` (الطلب)
 
@@ -24,7 +24,7 @@
 
 ### المهلات والإلغاء
 
-- **`timeout`** — بالمللي ثانية؛ يستخدم `AbortController` داخلياً يُدمج مع **`signal`** عبر `mergeAbortSignals`.
+- **`timeout`** — بالمللي ثانية؛ يُدمج مع **`signal`**. إن انتهت **المهلة الداخلية** أولاً → **`ERR_TIMEOUT`**؛ إلغاء المستخدم على **`signal`** → **`ERR_CANCELED`**.
 - **`signal`** — `AbortSignal` خارجي؛ يُدمج مع مهلة الإلغاء.
 
 ### معالجة الاستجابة
@@ -32,6 +32,13 @@
 - **`responseType`** — `"json"` | `"text"` | `"arraybuffer"` | `"blob"` | `"stream"`.  
   إن وُجد، يستنتج JSON من `Content-Type: application/json`، وإلا يُقرأ كنص.
 - **`validateStatus`** — `(status: number) => boolean`. الافتراضي: 200–299. إن رجع `false`، يُرمى **`OpenFetchError`** برمز `ERR_BAD_RESPONSE` مع إرفاق الاستجابة.
+- **`throwHttpErrors`** — يُستخدم **فقط عند عدم** تعيين **`validateStatus`**: مثل Ky (`false` لا يرمي على حالة HTTP؛ دالة ترجع `true` تعني «ارمِ لهذه الحالة»). إن وُجد **`validateStatus`** يُتجاهل **`throwHttpErrors`**.
+- **`jsonSchema`** — [Standard Schema](https://github.com/standard-schema/standard-schema) اختياري على JSON المحلّل بعد نجاح الحالة؛ الفشل → **`SchemaValidationError`** (قبل **`transformResponse`**).
+- **`init`** — مصفوفة `(config) => void` **متزامنة** على الإعداد المدمج **قبل** معترضات الطلب.
+
+### مدخل `Request`
+
+- **`client.request(Request, تجاوزات?)`** — يدمج عنوان الطلب والطريقة والرؤوس والجسم والإشارة مع الافتراضيات ثم التجاوزات.
 
 ### التحويلات
 
@@ -69,10 +76,11 @@ type OpenFetchResponse<T = unknown> = {
 
 - المفاتيح على المستوى الأعلى: الإعداد الأحدث يغلب.
 - **`headers`**: دمج سطحي؛ رؤوس الاستدعاء تغلب الافتراضيات.
-- **`middlewares`**، **`transformRequest`**، **`transformResponse`**: **تُلحق** (الافتراضيات أولاً ثم الخاصة بالاستدعاء).
-- **`retry`**، **`memoryCache`**: دمج سطحي للكائنات.
+- **`middlewares`**، **`transformRequest`**، **`transformResponse`**، **`init`**: **تُلحق** (الافتراضيات أولاً ثم الخاصة بالاستدعاء).
+- **`retry`**، **`memoryCache`**: دمج سطحي لحقول الكائن؛ **`retry.onBeforeRetry`** و **`retry.onAfterResponse`** يُركّبان (الافتراضيات ثم لكل استدعاء).
 - تُزال مفاتيح تلوث النموذج الأولي (`__proto__`، `constructor`، `prototype`) من الكائنات المدمجة والرؤوس / `retry` / `memoryCache` المتداخلة.
 
 ## التالي
 
+- [الميزات ومسار الطلب](./features-pipeline.md)  
 - [المعترضات والوسيط](./interceptors-middleware.md)
