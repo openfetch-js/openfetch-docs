@@ -74,13 +74,123 @@ const rows: Row[] = [
     },
   },
   {
-    key: "retry",
-    labelEn: "Retry & memory cache (opt-in)",
-    labelAr: "إعادة محاولة وتخزين مؤقت (اختياري)",
+    key: "transforms",
+    labelEn: "transformRequest / transformResponse",
+    labelAr: "تحويل الطلب / تحويل الاستجابة",
     cells: {
-      openfetch: { kind: "yes", en: "Plugins", ar: "إضافات" },
+      openfetch: {
+        kind: "yes",
+        en: "Ordered arrays on config",
+        ar: "مصفوفات مرتبة في الإعداد",
+      },
+      axios: {
+        kind: "yes",
+        en: "Built-in transform pipeline",
+        ar: "سلسلة تحويل مدمجة",
+      },
+      ky: {
+        kind: "partial",
+        en: "Hooks (no config arrays)",
+        ar: "خطافات (لا مصفوفات)",
+      },
+    },
+  },
+  {
+    key: "schema",
+    labelEn: "Validated JSON (Standard Schema)",
+    labelAr: "JSON مُتحقق (Standard Schema)",
+    cells: {
+      openfetch: {
+        kind: "yes",
+        en: "jsonSchema + fluent .json(schema)",
+        ar: "jsonSchema وـ .json(schema)",
+      },
+      axios: {
+        kind: "partial",
+        en: "Bring your own (e.g. Zod in transform)",
+        ar: "يدوي (مثلاً في transform)",
+      },
+      ky: { kind: "yes", en: ".json(schema)", ar: ".json(schema)" },
+    },
+  },
+  {
+    key: "throwGate",
+    labelEn: "HTTP status gate",
+    labelAr: "بوابة حالة HTTP",
+    cells: {
+      openfetch: {
+        kind: "yes",
+        en: "validateStatus + throwHttpErrors",
+        ar: "validateStatus و throwHttpErrors",
+      },
+      axios: {
+        kind: "partial",
+        en: "validateStatus",
+        ar: "validateStatus",
+      },
+      ky: {
+        kind: "yes",
+        en: "throwHttpErrors",
+        ar: "throwHttpErrors",
+      },
+    },
+  },
+  {
+    key: "requestInit",
+    labelEn: "Native Request + sync init",
+    labelAr: "Request أصلي + init متزامن",
+    cells: {
+      openfetch: {
+        kind: "yes",
+        en: "request(Request) + init[]",
+        ar: "request(Request) + init[]",
+      },
+      axios: {
+        kind: "partial",
+        en: "Config-based (no first-class init[])",
+        ar: "عبر الإعداد (لا init[])",
+      },
+      ky: {
+        kind: "yes",
+        en: "Request + init hooks",
+        ar: "Request وخطافات init",
+      },
+    },
+  },
+  {
+    key: "retry",
+    labelEn: "Retry with backoff (opt-in)",
+    labelAr: "إعادة محاولة مع تراجع (اختياري)",
+    cells: {
+      openfetch: {
+        kind: "yes",
+        en: "Plugins + onAfterResponse / ForceRetry",
+        ar: "إضافات + onAfterResponse / ForceRetry",
+      },
       axios: { kind: "partial", en: "Separate", ar: "منفصل" },
-      ky: { kind: "partial", en: "Retry only", ar: "إعادة محاولة فقط" },
+      ky: {
+        kind: "partial",
+        en: "Retry + afterResponse hook",
+        ar: "Retry وخطاف بعد الاستجابة",
+      },
+    },
+  },
+  {
+    key: "memCache",
+    labelEn: "GET memory cache (TTL / SWR)",
+    labelAr: "تخزين مؤقت للذاكرة (TTL / SWR)",
+    cells: {
+      openfetch: {
+        kind: "yes",
+        en: "createCacheMiddleware + store",
+        ar: "createCacheMiddleware ومخزن",
+      },
+      axios: {
+        kind: "partial",
+        en: "Third-party / DIY",
+        ar: "طرف ثالث أو يدوي",
+      },
+      ky: { kind: "no", en: "—", ar: "—" },
     },
   },
   {
@@ -99,6 +209,86 @@ const rows: Row[] = [
         en: "Response / parsed",
         ar: "Response / مُحلّى",
       },
+    },
+  },
+  {
+    key: "safeOps",
+    labelEn: "Errors, safe logs, URL guard",
+    labelAr: "أخطاء، سجلات آمنة، حماية URL",
+    cells: {
+      openfetch: {
+        kind: "yes",
+        en: "toShape, redact URL, mask headers, URL guard",
+        ar: "toShape، إخفاء query، قناع رؤوس، حماية URL",
+      },
+      axios: {
+        kind: "partial",
+        en: "AxiosError; DIY redaction",
+        ar: "AxiosError؛ إخفاء يدوي",
+      },
+      ky: {
+        kind: "partial",
+        en: "Typed errors; DIY redaction",
+        ar: "أخطاء مُنمّاة؛ إخفاء يدوي",
+      },
+    },
+  },
+  {
+    key: "timeoutCodes",
+    labelEn: "Timeout vs user cancel",
+    labelAr: "مهلة مقابل إلغاء المستخدم",
+    cells: {
+      openfetch: {
+        kind: "yes",
+        en: "ERR_TIMEOUT vs ERR_CANCELED",
+        ar: "ERR_TIMEOUT و ERR_CANCELED",
+      },
+      axios: {
+        kind: "partial",
+        en: "Often AbortError for both",
+        ar: "غالباً AbortError للاثنين",
+      },
+      ky: {
+        kind: "yes",
+        en: "TimeoutError vs AbortError",
+        ar: "TimeoutError و AbortError",
+      },
+    },
+  },
+  {
+    key: "fluent",
+    labelEn: "Fluent client + memo",
+    labelAr: "عميل متسلسل + memo",
+    cells: {
+      openfetch: {
+        kind: "yes",
+        en: "createFluentClient + .memo()",
+        ar: "createFluentClient و .memo()",
+      },
+      axios: { kind: "no", en: "—", ar: "—" },
+      ky: {
+        kind: "yes",
+        en: "Native chaining (no bundled memo)",
+        ar: "تسلسل أصلي (لا memo مدمج)",
+      },
+    },
+  },
+  {
+    key: "postIdem",
+    labelEn: "POST retry idempotency key",
+    labelAr: "مفتاح Idempotency لإعادة POST",
+    cells: {
+      openfetch: {
+        kind: "yes",
+        en: "Opt-in auto header (retry plugin)",
+        ar: "ترويسة تلقائية اختيارية",
+      },
+      axios: {
+        kind: "partial",
+        en: "Manual / interceptors",
+        ar: "يدوي أو معترضات",
+      },
+      ky: { kind: "partial", en: "Manual", ar: "يدوي" },
     },
   },
   {
@@ -138,8 +328,8 @@ const cols = computed(() =>
 
 const foot = computed(() =>
   props.locale === "ar"
-    ? "الحجم الفعلي يعتمد على الدمج والمسارات المستوردة. الفارق الجوهري: openFetch يضيف طبقة عميل فوق fetch دون الانتقال إلى XHR."
-    : "Bundle size depends on your toolchain and imports. The core idea: openFetch layers ergonomics on native fetch without switching transports."
+    ? "الحجم يعتمد على الدمج والاستيراد. openFetch يضيف طبقة عملية فوق fetch: مخطط JSON، بوابة حالات، Request وinit، وإعادة محاولة مع خطافات — راجع صفحة «الميزات ومسار الطلب» للتفاصيل."
+    : "Bundle size depends on your toolchain and imports. openFetch layers practical fetch ergonomics: Standard Schema JSON, status gates, Request + sync init, retry lifecycle hooks, ERR_TIMEOUT vs cancel — see Features & pipeline for the full diagram."
 );
 
 function cellText(row: Row, colId: keyof Row["cells"]) {
@@ -466,6 +656,30 @@ onUnmounted(() => {
 .cmp-matrix--in-view .cmp-matrix__table tbody tr:nth-child(9) {
   animation-delay: 0.66s;
 }
+.cmp-matrix--in-view .cmp-matrix__table tbody tr:nth-child(10) {
+  animation-delay: 0.72s;
+}
+.cmp-matrix--in-view .cmp-matrix__table tbody tr:nth-child(11) {
+  animation-delay: 0.78s;
+}
+.cmp-matrix--in-view .cmp-matrix__table tbody tr:nth-child(12) {
+  animation-delay: 0.84s;
+}
+.cmp-matrix--in-view .cmp-matrix__table tbody tr:nth-child(13) {
+  animation-delay: 0.9s;
+}
+.cmp-matrix--in-view .cmp-matrix__table tbody tr:nth-child(14) {
+  animation-delay: 0.96s;
+}
+.cmp-matrix--in-view .cmp-matrix__table tbody tr:nth-child(15) {
+  animation-delay: 1.02s;
+}
+.cmp-matrix--in-view .cmp-matrix__table tbody tr:nth-child(16) {
+  animation-delay: 1.08s;
+}
+.cmp-matrix--in-view .cmp-matrix__table tbody tr:nth-child(17) {
+  animation-delay: 1.14s;
+}
 
 .cmp-matrix__table tbody tr {
   transition: background-color 0.22s ease;
@@ -671,7 +885,7 @@ onUnmounted(() => {
 }
 
 .cmp-matrix--in-view .cmp-matrix__foot {
-  animation: cmp-foot-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.72s forwards;
+  animation: cmp-foot-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1.22s forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
